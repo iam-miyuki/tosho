@@ -238,18 +238,6 @@ final class LoanController extends AbstractController
         Request $request
     ): Response {
         $book = $loan->getBook();
-        $tab = $request->query->get('tab', 'family');
-
-        if (
-            $loan->getStatus() === LoanStatusEnum::returned
-            || $book->getStatus() === BookStatusEnum::available
-        ) {
-            return $this->render('loan/index.html.twig', [
-                'loan' => $loan,
-                'tab' => $tab,
-                'availableBook' => $book
-            ]);
-        }
 
         if (
             $loan->getStatus() != LoanStatusEnum::returned
