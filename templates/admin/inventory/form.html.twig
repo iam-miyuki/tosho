@@ -8,6 +8,12 @@
     'action': path('inventory'),
     'method': 'POST'
   }) }}
+
+			<div class="form-item">
+				<p>Nom d'inventaire :</p>
+				<div class="item-field">
+					{{ form_widget(form.name, {'attr': {'class': 'form-field'}}) }}</div>
+			</div>
 			<div class="form-item">
 				<p>Date :</p>
 				<div class="item-field">

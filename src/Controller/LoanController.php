@@ -234,8 +234,7 @@ final class LoanController extends AbstractController
     #[Route(path: '/return/{id}', name: 'return-book')]
     public function returnBook(
         Loan $loan,
-        EntityManagerInterface $em,
-        Request $request
+        EntityManagerInterface $em
     ): Response {
         $book = $loan->getBook();
 

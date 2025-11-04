@@ -36,6 +36,9 @@ class Inventory
     #[ORM\OneToMany(targetEntity: InventoryItem::class, mappedBy: 'inventory')]
     private Collection $inventoryItems;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->inventoryItems = new ArrayCollection();
@@ -128,6 +131,18 @@ class Inventory
                 $inventoryItem->setInventory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
