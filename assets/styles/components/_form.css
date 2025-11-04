@@ -135,7 +135,8 @@ form button:active {
 #inventory_filter_form_date_day,
 #inventory_form_date_month,
 #inventory_form_date_day,
-#inventory_form_date_year{
+#inventory_form_date_year,
+#inventory_form_name{
   margin: 0.5rem 0;
   padding: 0.3rem;
   outline: none;

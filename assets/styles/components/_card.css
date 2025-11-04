@@ -189,6 +189,7 @@ img.book-cover {
 .home-card:hover {
   transform: translateY(-6px);
   background-color: var(--color-btn-hover);
+  transition: 0.3s ease;
 }
 
 .alert-card{
@@ -207,26 +208,26 @@ img.book-cover {
   display: inline-block;
   width: 25px;
   height: 25px;
-  background-image: url(../../img/pencil.svg);
+  background-image: url("../../img/pencil.svg");
   background-size: cover;
 }
 .card-header .delete-icon a{
   display: inline-block;
   width: 25px;
   height: 25px;
-  background-image: url(../../img/trush.svg);
+  background-image: url("../../img/trush.svg");
   background-size: cover;
 }
 
 .card-header .edit-icon a:hover{
   width: 28px;
   height: 28px;
-  background-image: url(../../img/edit-hover.svg);
+  background-image: url("../../img/edit-hover.svg");
 }
 .card-header .delete-icon a:hover{
   width: 28px;
   height: 28px;
-  background-image: url(../../img/trush-hover.svg);
+  background-image: url("../../img/trush-hover.svg");
 }
 /* .card-header .edit img{
   
@@ -235,7 +236,7 @@ img.book-cover {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url(../../img/happy.svg);
+  background-image: url("../../img/happy.svg");
   background-size: cover;
 }
 .success-card{
@@ -257,7 +258,7 @@ img.book-cover {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url(../../img/neutral.svg);
+  background-image: url("../../img/neutral.svg");
   background-size: cover;
 }
 .edit-wrapper{

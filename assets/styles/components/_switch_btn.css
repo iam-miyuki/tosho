@@ -8,7 +8,8 @@
     margin-top: 1rem;
     margin-right: 2rem;
     margin-left: auto;
-    display: block;    
+    display: flex; 
+    gap: 0.5rem;   
 }
 @media (max-width: 768px) {
     .switch{
@@ -25,4 +26,12 @@
 
 .switch:hover{
     background-color: var(--color-btn-hover);
+}
+.switch-icon{
+    background-image: url(../../img/change.svg);
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
 }
