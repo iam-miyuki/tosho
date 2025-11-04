@@ -1,15 +1,14 @@
-.current-family-container hr{
+.current-family-container hr {
   color: var(--color-text);
   margin-top: 3rem;
   width: 60%;
 }
-.section-container{
-margin-top:2rem;
- 
+.section-container {
+  margin-top: 2rem;
+
   display: block;
   padding: 0.5rem 1.5rem;
 }
-
 
 .name-container {
   display: inline-block;
@@ -23,42 +22,38 @@ margin-top:2rem;
 .account-name {
   font-size: var(--font-l);
   font-weight: 800;
- 
 }
 
-
-.section-name.blue{
+.section-name.blue {
   background: var(--color-cameleon);
 }
-.section-name.yellow{
+.section-name.yellow {
   background: var(--color-mba);
 }
 
-
-.section-title{
-  margin-top: 3rem;
+.section-title {
+  margin-top: 1rem;
 }
 
-
-.page-title{
+.page-title {
   margin-top: 0rem;
 }
-.page-title h3{
+.page-title h3 {
   margin-top: 0;
 }
-.page-title img{
-width: 60px;
+.page-title img {
+  width: 60px;
 }
 @media (max-width: 768px) {
-  .page-title img{
-    width:40px;
+  .page-title img {
+    width: 40px;
   }
 }
 
-.container{
+.container {
   margin: 1rem;
 }
-.count-wrapper{
+.count-wrapper {
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
@@ -66,17 +61,53 @@ width: 60px;
   margin-left: auto;
   margin-right: auto;
 }
-@media  (max-width: 768px) {
-  .count-wrapper{
+@media (max-width: 768px) {
+  .count-wrapper {
     flex-wrap: wrap;
     flex-direction: column;
-  
   }
 }
-.count{
+.count {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.inventory-loan-status ul {
+  font-family: var(--font-sub);
+  font-weight: 600;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  padding-left: 0;
+}
+.inventory-loan-status li:last-child{
+  display: flex;
+  gap: 0.5rem;
+}
+.inventory-loan-status li:last-child a {
+  display: flex;
+  gap: 0.2rem;
+}
+.inventory-loan-status li:last-child a:hover{
+  color: var(--color-btn-hover);
+}
+
+.icon-right {
+  background-image: url(../../img/right.svg);
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .inventory-loan-status ul {
+    flex-direction: column;
+  }
 }

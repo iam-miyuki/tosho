@@ -33,17 +33,22 @@ final class LoanController extends AbstractController
         Request $request,
         FamilyRepository $familyRepository,
         BookRepository $bookRepository,
+        LoanRepository $loanRepository
     ): Response {
 
         $tab = $request->query->get('tab', 'family');
         $books = null;
         $results = null;
+        $activeLoans = $loanRepository->findAllByStatus(LoanStatusEnum::inProgress);
+        $overdueLoans = $loanRepository->findAllByStatus(LoanStatusEnum::overdue);
 
         if (!$request->isMethod('POST')) {
             return $this->render('loan/index.html.twig', [
                 'tab' => $tab,
                 'books' => $books,
                 'families' => $results,
+                'activeLoans'=>$activeLoans,
+                'overdueLoans'=>$overdueLoans
             ]);
         }
 
@@ -254,5 +259,15 @@ final class LoanController extends AbstractController
             ]);
         }
         return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+    #[Route('/overdue', name: 'overdue')]
+    public function overdue(
+        LoanRepository $loanRepository
+    ): Response {
+        $overdueLoans = $loanRepository->findAllByStatus(LoanStatusEnum::overdue);
+        return $this->render('loan/index.html.twig',[
+            'tab'=>'family',
+            'alloverdueloans'=>$overdueLoans
+        ]);
     }
 }

@@ -33,12 +33,10 @@ final class InventoryItemController extends AbstractController
         
     ): Response {
         $inventories = $inventoryRepository->findAllByStatus(InventoryStatusEnum::open);
-        $activeLoans = $loanRepository->findAllByStatus(LoanStatusEnum::inProgress);
-        $overdueLoans = $loanRepository->findAllByStatus(LoanStatusEnum::overdue);
+        
         return $this->render('inventory_item/index.html.twig', [
             'inventories' => $inventories,
-            'activeLoans'=>$activeLoans,
-            'overdueLoans'=>$overdueLoans
+           
         ]);
     }
 

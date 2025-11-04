@@ -1,4 +1,4 @@
-.footer-content p{
+.footer-content {
   font-family: var(--font-sub);
   font-weight: 600;
   font-size: var(--font-xs);
@@ -11,4 +11,49 @@
 .footer hr{
   color: var(--color-text);
   margin: 2rem 0;
+}
+.footer-content .contacts img{
+  width: 25px;
+}
+.contents{
+  display: flex;
+  gap: 1.5rem;
+
+}
+.contents a:hover{
+  color:var(--color-btn-hover);
+}
+.contacts img.github:hover{
+  content: url(../../img/github-hover.svg);
+}
+.contacts img.linkedin:hover{
+  content: url(../../img/linkedin-hover.svg);
+}
+.footer-logo{
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width:768px){
+  .footer-logo{
+    display: block;
+  }
+}
+.footer-contents-wrapper{
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+}
+@media (max-width:768px){
+  .footer-contents-wrapper{
+    display: block;
+  }
+  .contents{
+    margin-bottom: 0.5rem;
+  }
 }
