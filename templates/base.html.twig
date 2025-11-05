@@ -24,7 +24,13 @@
 			<div class="page-wrapper">
 				<div class="header">
 					<div class="header-top">
-						<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+						{% if is_granted('ROLE_LIBRARIEN') %}
+							<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+						{% elseif is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+						{% else %}
+							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+						{% endif %}
 						<div class="logout-wrapper">
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>
 							{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
@@ -95,6 +101,7 @@
 					<div class="footer-contents-wrapper">
 						<div class="contents">
 							<a href="{{ path('privacy') }}">Politique de cofidentialité</a>
+							<a href="{{ path('cookies') }}">Politique de cookies</a>
 							<a href="{{ path('mentions') }}">Mentions légales</a>
 						</div>
 						<div class="contacts">
@@ -102,7 +109,9 @@
 							<a href="https://www.linkedin.com/in/miyuki-cherbal-b79887366" target="_blank" rel="noopener noreferrer"><img class="linkedin" src="{{ asset('img/linkedin.svg') }}" alt="linkedin"></a>
 						</div>
 					</div>
-					<div>&copy; {{ "now"|date("Y") }} Tosho — All Rights Reserved</div>
+					<div>&copy;
+						{{ "now"|date("Y") }}
+						Tosho — All Rights Reserved</div>
 				</div>
 			</div>
 		{% endblock %}

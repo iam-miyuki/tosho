@@ -5,3 +5,18 @@
   font-family: var(--font-sub);
   font-weight: 500;
 }
+
+.static a:hover{
+    color: var(--color-btn-hover);
+}
+.static a{
+  text-decoration: underline;
+  text-decoration-color: var(--color-text);
+}
+.static{
+  text-align: justify;
+  margin: 3rem;
+}
+.static ul li{
+  list-style: disc;
+}
