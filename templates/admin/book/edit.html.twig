@@ -5,6 +5,8 @@
 		
 			{{ form_start(bookForm) }}
 			<div>			
+				<img class="book-cover" src="{{ bookToEdit.coverUrl ? asset(bookToEdit.coverUrl) : asset('img/child-book.svg') }}" 
+			alt="{{ bookToEdit.coverUrl ? bookToEdit.title : 'book-for-child' }}">
 				<div class="form-item">
 					<p>Code</p><div class="item-field"> :
 						{{ form_widget(bookForm.code, {'attr': {'class': 'form-field'}}) }}</div>

@@ -1,7 +1,7 @@
 <div class="card">
 	<h3>Livre disponible</h3>
 	<div class="card-body">
-		<img class="book-cover" src="{{ asset('img/child-book.svg') }}" alt="book-for-child">
+		<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" alt="{{ book.coverUrl ? currentBook.title : 'book-for-child' }}">
 		<div class="detail book-details">
 			<p>Code :
 				{{ book.code }}</p>

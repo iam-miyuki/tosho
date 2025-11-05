@@ -10,8 +10,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    env_file:
-      - .env.dev
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] # vérifie si le serveur MySQL local est prêt à accepter des connexions
       interval: 5s
@@ -21,7 +19,7 @@ services:
       - symfony_tosho_net
     volumes:
       - ../.mysql-tosho/data:/var/lib/mysql # : sépare hôte : conteneur. meme si le conteneur est supprimé les données sont sauvegardé localement dans ../.mysql-tosho/data
-      #- ../.mysql-tosho/init:/docker-entrypoint-initdb.d #permet d'initialiser la bdd ou d'executer des scripts (anonymyser les données)
+      - ../.mysql-tosho/init:/docker-entrypoint-initdb.d #permet d'initialiser la bdd ou d'executer des scripts (anonymyser les données)
   ### db tosho
 
   ###> symfony/mailer ###

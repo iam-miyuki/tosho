@@ -3,7 +3,8 @@
 		{% for item in checked %}
 			<div class="card">
 				<div class="card-body">
-					<img class="book-cover" src="{{ asset('img/child-book.svg') }}" alt="book-for-child">
+					<img class="book-cover" src="{{ itam.book.coverUrl ? asset(itam.book.coverUrl) : asset('img/child-book.svg') }}" 
+			alt="{{ itam.book.coverUrl ? itam.book.title : 'book-for-child' }}">
 					<div class="detail book-details">
 						<p>Statut :
 							{{ item.status.value }}</p>

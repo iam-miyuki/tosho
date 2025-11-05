@@ -22,6 +22,7 @@ final class AccountController extends AbstractController
     #[Route('/', name: 'account')]
     public function index(): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
         return $this->render('account/index.html.twig', [
             'user' => $user,
@@ -32,9 +33,18 @@ final class AccountController extends AbstractController
         Request $request,
         EntityManagerInterface $em
     ): Response {
+        /** @var User $user */
         $user = $this->getUser();
         $form = $this->createForm(AccountForm::class, $user);
         $form->handleRequest($request);
+
+        if (!$request->isMethod('POST')) {
+            return $this->render('account/index.html.twig', [
+                'form' => $form->createView(),
+                'userToEdit' => $user
+            ]);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             return $this->render('account/index.html.twig', [
@@ -42,10 +52,7 @@ final class AccountController extends AbstractController
                 'successMessage' => 'Modifié avec succès !'
             ]);
         }
-        return $this->render('account/index.html.twig', [
-            'form' => $form->createView(),
-            'userToEdit' => $user
-        ]);
+        return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
     #[Route('/change', name: 'change-pwd')]
     public function changePwd(
@@ -58,43 +65,47 @@ final class AccountController extends AbstractController
         $user = $this->getUser();
         $pwdForm = $this->createForm(ChangePwdForm::class, $user);
         $pwdForm->handleRequest($request);
-        if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
-            $pwd     = $pwdForm->get('password')->getData();
-            $newPwd  = $pwdForm->get('newPwd')->getData();
-            $confirm = $pwdForm->get('confirm')->getData();
 
-            if ($hasher->isPasswordValid($user, $pwd)) {
-                if ($hasher->isPasswordValid($newPwd, $confirm)) {
-                    $user->setPassword($hasher->hashPassword($user, $newPwd));
-                    $em->flush();
-                    $email = new TemplatedEmail();
-                    $email
-                        ->from('tosho@mail.com')
-                        ->to($user->getEmail())
-                        ->subject('Votre mot de passe a été changé avec succès !')
-                        ->htmlTemplate('account/email.html.twig')
-                        ->context([
-                            'user' => $user,
-                        ]);
-                    $mailer->send($email);
-                    return $this->render('account/index.html.twig', [
-                        'successMessage' => 'Mot de passe a été changé avec succès !',
-                    ]);
-                } else {
-                    return $this->render('account/index.html.twig', [
-                        'errorConfirm' => 'Les deux nouveaux mots de passe ne correspondent pas.',
-                        'pwdForm' => $pwdForm->createView(),
-                    ]);
-                }
-            } else {
-                return $this->render('account/index.html.twig', [
-                    'errorPwd' => 'Le mot de passe actuel incorrect',
-                    'pwdForm' => $pwdForm->createView(),
-                ]);
-            }
+        if (!$request->isMethod('POST')) {
+            return $this->render('account/index.html.twig', [
+                'pwdForm' => $pwdForm->createView(),
+            ]);
         }
+
+        if (!$pwdForm->isSubmitted() && $pwdForm->isValid()) {
+            return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        $pwd     = $pwdForm->get('password')->getData();
+        $newPwd  = $pwdForm->get('newPwd')->getData();
+        $confirm = $pwdForm->get('confirm')->getData();
+        // dd($user);
+        if (!$hasher->isPasswordValid($user, $pwd)) {
+            return $this->render('account/index.html.twig', [
+                'errorPwd' => 'Le mot de passe actuel incorrect',
+                'pwdForm' => $pwdForm->createView(),
+            ]);
+        }
+        if ($newPwd !== $confirm) {
+            return $this->render('account/index.html.twig', [
+                'errorConfirm' => 'Les deux nouveaux mots de passe ne correspondent pas.',
+                'pwdForm' => $pwdForm->createView(),
+            ]);
+        }
+        $user->setPassword($hasher->hashPassword($user, $newPwd));
+        $em->flush();
+        $email = new TemplatedEmail();
+        $email
+            ->from('tosho@mail.com')
+            ->to($user->getEmail())
+            ->subject('Votre mot de passe a été changé avec succès !')
+            ->htmlTemplate('account/email.html.twig')
+            ->context([
+                'user' => $user,
+            ]);
+        $mailer->send($email);
         return $this->render('account/index.html.twig', [
-            'pwdForm' => $pwdForm->createView(),
+            'successMessage' => 'Mot de passe a été changé avec succès !',
         ]);
     }
 }

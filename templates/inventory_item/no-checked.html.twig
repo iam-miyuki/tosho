@@ -3,7 +3,8 @@
 		{% for book in noChecked %}
 			<div class="card">
 				<div class="card-body">
-					<img class="book-cover" src="{{ asset('img/child-book.svg') }}" alt="book-for-child">
+					<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" 
+			alt="{{ book.coverUrl ? book.title : 'book-for-child' }}">
 					<div class="detail book-details">
 						<p>Code :
 							{{ book.code }}</p>
