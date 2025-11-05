@@ -24,7 +24,7 @@
 			<div class="page-wrapper">
 				<div class="header">
 					<div class="header-top">
-						<a href="{{ path('home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+						<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
 						<div class="logout-wrapper">
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>
 							{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
@@ -42,7 +42,7 @@
 
 							<ul class="menu menu-librarien">
 								<li class="menu-item">
-									<a href="{{ path('home') }}"><img src="{{ asset('img/home.svg') }}" alt="home"><span class="menu-text">Home</span>
+									<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/home.svg') }}" alt="home"><span class="menu-text">Home</span>
 									</a>
 								</li>
 								<li class="menu-item">
@@ -86,7 +86,7 @@
 			<div class="footer">
 				<hr>
 				<div class="footer-content">
-					<a href="{{ path('home') }}">
+					<a href="{{ path('librarien_home') }}">
 						<div class="footer-logo">
 							<img src="{{ asset('img/logo-small.svg') }}" alt="logo">
 							<p>Gestion des prêts de livres pour école japonaise</p>
@@ -94,15 +94,15 @@
 					</a>
 					<div class="footer-contents-wrapper">
 						<div class="contents">
-							<a href="">Politique de cofidentialité</a>
-							<a href="">Mention légale</a>
+							<a href="{{ path('privacy') }}">Politique de cofidentialité</a>
+							<a href="{{ path('mentions') }}">Mentions légales</a>
 						</div>
 						<div class="contacts">
-							<a href="https://github.com/iam-miyuki"><img class="github" src="{{ asset('img/github.svg') }}" alt="github"></a>
-							<a href="https://www.linkedin.com/in/miyuki-cherbal-b79887366"><img class="linkedin" src="{{ asset('img/linkedin.svg') }}" alt="linkedin"></a>
+							<a href="https://github.com/iam-miyuki" target="_blank" rel="noopener noreferrer"><img class="github" src="{{ asset('img/github.svg') }}" alt="github"></a>
+							<a href="https://www.linkedin.com/in/miyuki-cherbal-b79887366" target="_blank" rel="noopener noreferrer"><img class="linkedin" src="{{ asset('img/linkedin.svg') }}" alt="linkedin"></a>
 						</div>
 					</div>
-					<div>Tosho &copy; </div>
+					<div>&copy; {{ "now"|date("Y") }} Tosho — All Rights Reserved</div>
 				</div>
 			</div>
 		{% endblock %}

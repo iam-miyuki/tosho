@@ -64,7 +64,7 @@
 						</ul>
 					</nav>
 				</div>
-				<a href="{{path('home')}}">
+				<a href="{{path('librarien_home')}}">
 					<div class="switch librarien">
 						<div class="switch-icon"></div>
 						<div>
@@ -83,7 +83,7 @@
 			<div class="footer">
 				<hr>
 				<div class="footer-content">
-					<a href="{{ path('home') }}">
+					<a href="{{ path('admin_home') }}">
 						<div class="footer-logo">
 							<img src="{{ asset('img/logo-small.svg') }}" alt="logo">
 							<p>Gestion des prêts de livres pour école japonaise</p>
@@ -91,15 +91,15 @@
 					</a>
 					<div class="footer-contents-wrapper">
 						<div class="contents">
-							<a href="">Politique de cofidentialité</a>
-							<a href="">Mention légale</a>
+							<a href="{{ path('privacy') }}">Politique de cofidentialité</a>
+							<a href="{{ path('mentions') }}">Mentions légales</a>
 						</div>
 						<div class="contacts">
-							<a href="https://github.com/iam-miyuki"><img class="github" src="{{ asset('img/github.svg') }}" alt="github"></a>
-							<a href="https://www.linkedin.com/in/miyuki-cherbal-b79887366"><img class="linkedin" src="{{ asset('img/linkedin.svg') }}" alt="linkedin"></a>
+							<a href="https://github.com/iam-miyuki" target="_blank" rel="noopener noreferrer"><img class="github" src="{{ asset('img/github.svg') }}" alt="github"></a>
+							<a href="https://www.linkedin.com/in/miyuki-cherbal-b79887366" target="_blank" rel="noopener noreferrer"><img class="linkedin" src="{{ asset('img/linkedin.svg') }}" alt="linkedin"></a>
 						</div>
 					</div>
-					<div>Tosho &copy; </div>
+					<div>&copy; {{ "now"|date("Y") }} Tosho — All Rights Reserved</div>
 				</div>
 			</div>
 		{% endblock %}
