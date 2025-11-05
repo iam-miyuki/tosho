@@ -20,6 +20,11 @@
 		{% endblock %}
 	</head>
 	<body class="librarien-body">
+	<div id="cookie-banner" class="cookie-banner">
+					<p>Nous utilisons des cookies pour améliorer votre expérience. Acceptez-vous les cookies ?</p>
+					<button id="cookie-accept">OK</button>
+					<button id="cookie-decline">Refuser</button>
+				</div>
 		{% block header %}
 			<div class="page-wrapper">
 				<div class="header">
@@ -29,7 +34,7 @@
 						{% elseif is_granted('ROLE_ADMIN') %}
 							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
 						{% else %}
-							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+							<a href="{{ path('tosho_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
 						{% endif %}
 						<div class="logout-wrapper">
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>
@@ -84,6 +89,7 @@
 				</div>
 			{% endblock %}
 			<main>
+
 				{% block body %}{% endblock %}
 			</main>
 		</div>

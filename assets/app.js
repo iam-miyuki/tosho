@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activeButtons.forEach((button) => {
     button.addEventListener("click", async () => {
       const route = button.dataset.href;
-        // console.log(route)
+      // console.log(route)
       try {
         const response = await fetch(route);
         if (!response.ok) {
@@ -56,6 +56,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  
-});
+  //cookies
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("cookie-accept");
+    const declineBtn = document.getElementById("cookie-decline");
 
+    // Vérifie si l'utilisateur a déjà choisi
+    const consent = localStorage.getItem("cookieConsent");
+    if (consent) {
+      banner.style.display = "none";
+    }
+
+    // Accepter les cookies
+    acceptBtn.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "accepted");
+      banner.style.display = "none";
+    });
+
+    // Refuser les cookies
+    declineBtn.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "declined");
+      banner.style.display = "none";
+    });
+  });
+});
