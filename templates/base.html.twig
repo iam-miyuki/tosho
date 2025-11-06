@@ -20,11 +20,7 @@
 		{% endblock %}
 	</head>
 	<body class="librarien-body">
-	<div id="cookie-banner" class="cookie-banner">
-					<p>Nous utilisons des cookies pour améliorer votre expérience. Acceptez-vous les cookies ?</p>
-					<button id="cookie-accept">OK</button>
-					<button id="cookie-decline">Refuser</button>
-				</div>
+
 		{% block header %}
 			<div class="page-wrapper">
 				<div class="header">
@@ -40,16 +36,17 @@
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>
 							{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
 								<div class="logout">
-									<a href="{{ path('app_logout') }}"><img src="{{ asset('img/logout.svg') }}" alt="logout"><span class="menu-text"></span>
+									<a href="{{ path('tosho_home') }}"><img src="{{ asset('img/logout.svg') }}" alt="logout"><span class="menu-text"></span>
 									</a>
 								</div>
 							{% endif %}
 						</div>
 					</div>
 
-					<nav>
-						<h2>Gérez les prêts de livres en toute simplicité</h2>
-						{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
+
+					{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
+						<nav>
+							<h2>Gérez les prêts de livres en toute simplicité</h2>
 
 							<ul class="menu menu-librarien">
 								<li class="menu-item">
@@ -72,8 +69,12 @@
 									</li>
 								{% endif %}
 							</ul>
-						{% endif %}
-					</nav>
+						</nav>
+						{% else %}
+						<nav class="visitor-nav">
+							<h2 class="visitor-subtitle">Gérez les prêts de livres en toute simplicité</h2>
+							</nav>
+					{% endif %}
 					{% if is_granted('ROLE_ADMIN') %}
 
 						<a href="{{path('admin_home')}}">
@@ -121,5 +122,6 @@
 				</div>
 			</div>
 		{% endblock %}
+		{% include "cookie.html.twig" %}
 	</body>
 </html>

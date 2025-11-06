@@ -132,7 +132,15 @@ p.sub-title {
     margin-right: auto;
 
   }
-  
+  .visitor-nav{
+    display: block;
+  }
+  .visitor-nav .visitor-subtitle{
+    display: block;
+    font-size: var(--font-m);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
   
   .header nav h2{
     display: none;
@@ -160,5 +168,6 @@ p.sub-title {
   p.sub-title {
     display: none;
   }
+  
 }
 
