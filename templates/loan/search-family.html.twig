@@ -2,24 +2,6 @@
 	{% include "loan/overdueloans.html.twig" %}
 
 {% else %}
-
-	<div class="inventory-loan-status">
-		<ul>
-			<li>
-				Total des prêts en cours :
-				{{ activeLoans|length }}</li>
-			<li>
-				Retours en retard :
-				{{ overdueLoans|length }}
-				<a href="{{path('overdue')}}">
-						<div class="icon-right"></div>
-						<div>
-							Voir
-						</div>
-				</a>
-			</li>
-		</ul>
-	</div>
 	<form action="{{path('loan')}}" method="POST">
 		<h3 class="form-title">Entrez un nom ou email</h3>
 		<input type="text" id="family_name" class="search-input" name="family_name" placeholder="Sakata, サカタ..."/>

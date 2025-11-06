@@ -32,23 +32,18 @@ final class LoanController extends AbstractController
     public function index(
         Request $request,
         FamilyRepository $familyRepository,
-        BookRepository $bookRepository,
-        LoanRepository $loanRepository
+        BookRepository $bookRepository
     ): Response {
 
         $tab = $request->query->get('tab', 'family');
         $books = null;
         $results = null;
-        $activeLoans = $loanRepository->findAllByStatus(LoanStatusEnum::inProgress);
-        $overdueLoans = $loanRepository->findAllByStatus(LoanStatusEnum::overdue);
 
         if (!$request->isMethod('POST')) {
             return $this->render('loan/index.html.twig', [
                 'tab' => $tab,
                 'books' => $books,
-                'families' => $results,
-                'activeLoans'=>$activeLoans,
-                'overdueLoans'=>$overdueLoans
+                'families' => $results
             ]);
         }
 
@@ -245,7 +240,6 @@ final class LoanController extends AbstractController
 
         if (
             $loan->getStatus() != LoanStatusEnum::returned
-            && $book->getStatus() != BookStatusEnum::available
         ) {
             $loan->setStatus(LoanStatusEnum::returned);
             $book->setStatus(BookStatusEnum::available);

@@ -1,28 +1,27 @@
 <div class="cards-wrapper">
-	
-		{% for book in noChecked %}
-			<div class="card">
-				<div class="card-body">
-					<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" 
-			alt="{{ book.coverUrl ? book.title : 'book-for-child' }}">
-					<div class="detail book-details">
-						<p>Code :
-							{{ book.code }}</p>
-						<p>Titre :
-							{{ book.title }}</p>
-						<p>Auteur :
-							{{ book.author }}</p>
-						<p>Statut :
-							{{ book.status.value }}</p>
-						<p>Emplacement :
-							<span class="location">{{ book.location.value }}</span>
-						</p>
-					</div>
-				</div>
-				<div class="href-btn">
-					<a href="{{path('add-item',{tab:'new',id:currentInventory.id,book:book.id})}}">Vérifier</a>
+
+	{% for book in noChecked %}
+		<div class="card">
+			<div class="card-body">
+				<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" alt="{{ book.coverUrl ? book.title : 'book-for-child' }}">
+				<div class="detail book-details">
+					<p>Code :
+						{{ book.code }}</p>
+					<p>Titre :
+						{{ book.title }}</p>
+					<p>Auteur :
+						{{ book.author }}</p>
+					<p>Statut :
+						{{ book.status.value }}</p>
+					<p>Emplacement :
+						<span class="location">{{ book.location.value }}</span>
+					</p>
 				</div>
 			</div>
-		{% endfor %}
-	
+			<div class="href-btn">
+				<a href="{{path('add-item',{tab:'new',id:currentInventory.id,book:book.id})}}">Vérifier</a>
+			</div>
+		</div>
+	{% endfor %}
 </div>
+<a href="{{ path('inventory-page', {id:currentInventory.id}) }}" class="href-btn cancel-btn">Retour</a>

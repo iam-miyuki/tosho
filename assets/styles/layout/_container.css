@@ -30,6 +30,12 @@
 .section-name.yellow {
   background: var(--color-mba);
 }
+.section-name.orange{
+  background: var(--color-alert);
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .section-title {
   margin-top: 1rem;
@@ -97,7 +103,7 @@
 }
 
 .icon-right {
-  background-image: url(../../img/right.svg);
+  background-image: url("../../img/right.svg");
   display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
@@ -105,9 +111,42 @@
   height: 20px;
 }
 
+.cards-wrapper.overdue-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
 
+.total-loan-icon, .overdue-icon{
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+.total-loan-icon{
+  background-image: url(../../img/total.svg);
+  
+}
+.overdue-icon{
+  background-image: url(../../img/announce.svg);
+}
+.inventory-loan-status li{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.inventory-loan-status ul{
+  display: flex;
+  gap: 3rem;
+}
 @media (max-width: 768px) {
   .inventory-loan-status ul {
     flex-direction: column;
+    gap: 0.5rem;
   }
 }
+
+

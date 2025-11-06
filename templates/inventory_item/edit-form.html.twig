@@ -1,4 +1,4 @@
-<div class="card one-card add-wrapper">
+<div class="card one-card add-wrapper checked-item">
 	<div class="card-title card-title-family">
 		<h4>
 			Livre déjà vérifié
@@ -45,7 +45,7 @@
 	{{ form_widget(editForm.note, {'attr': {'class': 'form-field'}}) }}
 	<div class="btn-wrapper">
 		<button class="btn-form" type="submit">Modifier</button>
-		<div class="href-btn cancel-btn"><a href="{{path('inventory-page',{id:currentBook.id, tab:'check'})}}">Annuler</a></div>
+		<div class="href-btn cancel-btn">Annuler</a></div>
 	</div>
 	{{ form_end(editForm) }}
 </div>

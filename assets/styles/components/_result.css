@@ -47,6 +47,7 @@
 }
 .no-result.no-loan{
   border: solid 1px var(--color-text);
+  margin-bottom: 1rem;
 }
 
 @media (max-width:768px) {

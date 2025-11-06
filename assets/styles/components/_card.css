@@ -25,6 +25,7 @@
   }
   .card img.book-cover{
     width: 40px;
+    height: 40px;
   }
   .card{
     width: max-content;
@@ -47,9 +48,16 @@
   margin-top: 0rem;
 }
 .inventory-card{
-  background-color: transparent;
-  border: none;
+  background-color: var(--color-cards);
+
 }
+
+.inventory-card .book-details{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .cards-wrapper {
   max-width: 100%;
   padding: 0 1rem;
@@ -165,8 +173,14 @@
 
 img.book-cover {
   width: 80px;
-  height: 100px;
+  height: 80px;
   background-color:white;
+}
+@media (max-width:768px) {
+  img.book-cover{
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .card-title{
