@@ -37,6 +37,9 @@
   .card.one-card.alert-card{
     width: 90%;
   }
+  .tab-content .card{
+    width: auto;
+  }
 
 .card.home-card img{
   width: 60px;
@@ -173,8 +176,9 @@
 }
 @media (max-width:768px) {
  .form-item .item-field{
-  width:fit-content;
+  width:auto;
   margin-right: 0.2rem;
+  padding: 0;
  }
 }
 .form-item p{
@@ -274,7 +278,7 @@ img.book-cover {
   background-size: cover;
 }
 .icon-not-found {
-  background-image: url(../../img/ghost.svg);
+  background-image: url("../../img/ghost.svg");
   display: inline-block;
   width: 30px;
   height: 30px;

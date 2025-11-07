@@ -72,14 +72,11 @@ final class AccountController extends AbstractController
             ]);
         }
 
-        if (!$pwdForm->isSubmitted() && $pwdForm->isValid()) {
-            return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
         $pwd     = $pwdForm->get('password')->getData();
         $newPwd  = $pwdForm->get('newPwd')->getData();
         $confirm = $pwdForm->get('confirm')->getData();
-        // dd($user);
+
+
         if (!$hasher->isPasswordValid($user, $pwd)) {
             return $this->render('account/index.html.twig', [
                 'errorPwd' => 'Le mot de passe actuel incorrect',
@@ -105,6 +102,7 @@ final class AccountController extends AbstractController
             ]);
         $mailer->send($email);
         return $this->render('account/index.html.twig', [
+            'pwdForm' => $pwdForm->createView(),
             'successMessage' => 'Mot de passe a été changé avec succès !',
         ]);
     }

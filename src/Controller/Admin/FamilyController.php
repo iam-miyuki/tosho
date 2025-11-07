@@ -60,7 +60,7 @@ final class FamilyController extends AbstractController
             ]);
         }
         return $this->render('admin/family/index.html.twig', [
-            'tab' => $currentTab,
+            'tab' => 'new',
             'newFamilyForm' => $form->createView(),
             'searchFamilyForm' => $searchFamilyForm->createView()
         ]);

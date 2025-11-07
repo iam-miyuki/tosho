@@ -49,7 +49,7 @@
 }
 
 .status-tab .tab-icon {
-  background-image: url("../../img/search-3.svg");
+  background-image: url("../../img/search.svg");
 }
 
 .check-tab .tab-icon{
@@ -88,6 +88,11 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+  .tab-content form{
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
+  
 }
 .tab-content img{
   width: 30px;

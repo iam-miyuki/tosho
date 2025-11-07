@@ -52,13 +52,6 @@ final class LibrarienController extends AbstractController
 
         $role = 'ROLE_LIBRARIEN';
 
-        if (!$request->isMethod('POST')) {
-            return $this->render('admin/librarien/index.html.twig', [
-                'tab' => $currentTab,
-                'searchForm' => $form,
-                'registerForm' => $registerForm
-            ]);
-        }
         if ($form->isSubmitted()  && $form->isValid()) {
             $query = $form->get('query')->getData();
             $results = $userRepository->findAllWithFilterQuery($role, $query);
@@ -93,8 +86,12 @@ final class LibrarienController extends AbstractController
                 'successMessage' => 'Ajout avec succès !'
             ]);
         }
-
-        return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        
+        return $this->render('admin/librarien/index.html.twig', [
+            'tab' => $currentTab,
+            'searchForm' => $form,
+            'registerForm' => $registerForm
+        ]);
     }
 
     #[Route('/{id}', name: 'show-librarien')]
@@ -138,7 +135,7 @@ final class LibrarienController extends AbstractController
             ]
         );
     }
-    
+
     #[Route('/change-status/{id}', name: 'change-status')]
     public function change(
         User $user, //ParamConverter : faire le lien entre le paramètre dans l'url(id) et l'entité sans faire de requette
