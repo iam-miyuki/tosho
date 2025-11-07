@@ -70,3 +70,8 @@
 .result-icon.happy{
   background-image: url(../../img/happy.svg);
 }
+li a.loanby-family{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -7,6 +7,10 @@
 		<div class="href-btn">
 			<a href="{{path('show-family',{id:edited.id})}}">Voir la famille</a>
 		</div>
+	{% elseif addedFamily is defined and addedFamily is not null%}
+		<div class="href-btn">
+			<a href="{{path('show-family',{id:addedFamily.id})}}">Voir la famille</a>
+		</div>
 	{% endif %}
 
 </div>

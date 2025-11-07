@@ -80,6 +80,7 @@ form button:active {
 @media  (max-width: 768px) {
 .forms-wrapper{
   flex-direction: column;
+  gap: 1.5rem;
 }
 }
 
@@ -96,6 +97,43 @@ form button:active {
   color: var(--color-btn);
   font-weight: 800;
 }
+
+.form-field{
+  border: none;
+  border-bottom: 1px solid var(--color-text);
+  color: var(--color-text);
+  margin-left: 0.5rem;
+  background-color: white;
+  padding: 0.5rem;
+  font-family: var(--font-sub);
+  border-radius: 0.3rem;
+}
+@media  (max-width: 768px) {
+.form-field{
+  padding: 0.5rem;
+  width: fit-content;
+}
+.form-item{
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+.form-item.column-mb{
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+  margin-left: 0.5rem;
+}
+}
+textarea.form-field{
+  border: 1px solid var(--color-text);
+  color: var(--color-text);
+  margin-left: 0.5rem;
+  background-color: white;
+  padding: 0.5rem;
+  font-family: var(--font-sub);
+  border-radius: 0.3rem;
+}
+
 
 .form-field.enum-field{
   border: none;

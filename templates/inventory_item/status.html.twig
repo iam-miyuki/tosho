@@ -22,7 +22,7 @@
 		<div>
 			<a href="{{ path('item-list', { id: currentInventory.id,page:'all' }) }}">
 				<div class="btn-card">
-					<p>Total livres à verifier :
+					<p>Total à verifier :
 						{{allBooksByLocation | length}}
 					</p>
 				</div>
@@ -31,7 +31,7 @@
 		<div>
 			<a href="{{ path('item-list', { id: currentInventory.id,page:'checked' }) }}">
 				<div class="btn-card">
-					<p>Livres vérifiés :
+					<p>Déjà vérifiés :
 						{{checkedItems | length}}
 					</p>
 				</div>
@@ -40,7 +40,7 @@
 		<div>
 			<a href="{{ path('item-list', { id: currentInventory.id,page:'no-checked' }) }}">
 				<div class="btn-card">
-					<p>Reste à vérifier :
+					<p>Restants à vérifier :
 						{{noCheckedBooks| length}}
 					</p>
 				</div>

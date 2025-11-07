@@ -28,11 +28,14 @@
     height: 40px;
   }
   .card{
-    width: max-content;
     margin-left: auto;
     margin-right: auto;
     font-size: var(--font-s);
     padding: 1rem;
+    width: max-content;
+  }
+  .card.one-card.alert-card{
+    width: 90%;
   }
 
 .card.home-card img{
@@ -57,7 +60,9 @@
   margin-left: auto;
   margin-right: auto;
 }
-
+.card.checked-item{
+  background-color: var(--color-cameleon);
+}
 .cards-wrapper {
   max-width: 100%;
   padding: 0 1rem;
@@ -90,11 +95,13 @@
   display: block;
 }
 .cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  display: flex;
   gap: 1.5rem;
   justify-items: center;
   padding: 1rem 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
 }
 @media (max-width:768px) {
   .cards-container{
@@ -164,11 +171,17 @@
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
+@media (max-width:768px) {
+ .form-item .item-field{
+  width:fit-content;
+  margin-right: 0.2rem;
+ }
+}
 .form-item p{
   margin-top: auto;
   margin-bottom: auto;
   line-height: 100%;
-  margin-right: 0.5rem;
+ 
 }
 
 img.book-cover {
@@ -258,6 +271,13 @@ img.book-cover {
   width: 30px;
   height: 30px;
   background-image: url("../../img/happy.svg");
+  background-size: cover;
+}
+.icon-not-found {
+  background-image: url(../../img/ghost.svg);
+  display: inline-block;
+  width: 30px;
+  height: 30px;
   background-size: cover;
 }
 .success-card{

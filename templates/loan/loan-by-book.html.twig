@@ -17,8 +17,12 @@
 						{{ family.name|upper }}
 						/
 						{{ family.jpName }}
-						<a href="{{path('loan-book-family',{id: bookToLoan.id,family:family.id})}}">
-							Prêter à cette famille</a>
+						<a href="{{path('loan-book-family',{id: bookToLoan.id,family:family.id})}}" class="loanby-family">
+							<div class="icon-right"></div>
+							
+								Prêter à cette famille
+							
+						</a>
 					</li>
 
 				{% endfor %}

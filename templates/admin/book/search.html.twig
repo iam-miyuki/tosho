@@ -96,6 +96,9 @@
 			</div>
 			<div class="icon-alert"></div>
 			<p>Veuillez le rendre avant de pouvoir le supprimer.</p>
+			<div class="href-btn cancel-btn">
+				<a href="{{path('admin-show-book',{id:loanBook.id})}}">Retour</a>
+			</div>
 		</div>
 	{% endif %}
 	{% if modifiedBook is defined and modifiedBook is not null %}

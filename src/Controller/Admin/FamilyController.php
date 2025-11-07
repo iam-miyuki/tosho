@@ -35,22 +35,14 @@ final class FamilyController extends AbstractController
         $currentTab = $request->query->get('tab', 'family');
         $results = null;
 
-        if (!$request->isMethod('POST')) {
-            return $this->render('admin/family/index.html.twig', [
-                'tab' => $currentTab,
-                'newFamilyForm' => $form->createView(),
-                'searchFamilyForm' => $searchFamilyForm->createView()
-            ]);
-        }
-
-        if ($searchFamilyForm->isSubmitted()) {
+        if ($searchFamilyForm->isSubmitted() && $searchFamilyForm->isValid()) {
             $name = $searchFamilyForm->get('search')->getData();
             $results = $familyRepository->findAllByName($name);
 
             return $this->render('admin/family/index.html.twig', [
                 'tab' => 'family',
-                'results'=>$results,
-                'searchFamilyForm'=>$searchFamilyForm->createView()
+                'results' => $results,
+                'searchFamilyForm' => $searchFamilyForm->createView()
             ]);
         }
 
@@ -59,15 +51,19 @@ final class FamilyController extends AbstractController
             $family->setCreatedAt(new \DateTimeImmutable());
             $em->persist($family);
             $em->flush();
+
             return $this->render('admin/family/index.html.twig', [
                 'addedFamily' => $family,
                 'tab' => 'new',
                 'newFamilyForm' => $form->createView(),
-                'successMessage' => 'Ajouter des membres de la famille',
+                'successMessage' => 'Famille ajoutée avec succès !',
             ]);
         }
-
-        return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        return $this->render('admin/family/index.html.twig', [
+            'tab' => $currentTab,
+            'newFamilyForm' => $form->createView(),
+            'searchFamilyForm' => $searchFamilyForm->createView()
+        ]);
     }
 
     #[Route('/{id}', name: 'show-family')]
@@ -81,7 +77,7 @@ final class FamilyController extends AbstractController
         $searchFamilyForm = $this->createForm(SearchFamilyForm::class, $family);
         $searchFamilyForm->handleRequest($request);
 
-        if($family){
+        if ($family) {
             return $this->render('admin/family/index.html.twig', [
                 'tab' => 'family',
                 'currentFamily' => $family,
@@ -89,7 +85,7 @@ final class FamilyController extends AbstractController
                 'searchFamilyForm' => $searchFamilyForm->createView()
             ]);
         }
-        
+
         return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
     #[Route('/edit/{id}', name: 'edit-family')]
