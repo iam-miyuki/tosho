@@ -26,11 +26,11 @@
 				<div class="header">
 					<div class="header-top">
 						{% if is_granted('ROLE_LIBRARIEN') %}
-							<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+							<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"><h1>Tosho</h1></a>
 						{% elseif is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"><h1>Tosho</h1></a>
 						{% else %}
-							<a href="{{ path('tosho_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+							<a href="{{ path('tosho_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"><h1>Tosho</h1></a>
 						{% endif %}
 						<div class="logout-wrapper">
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>

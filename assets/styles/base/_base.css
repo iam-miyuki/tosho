@@ -13,6 +13,9 @@ h1 {
   font-family: var(--font-sub);
   font-size: var(--font-s);
 }
+.header h1{
+  display: none;
+}
 h2 {
   font-size: var(--font-l)
 }

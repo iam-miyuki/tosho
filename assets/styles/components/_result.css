@@ -75,3 +75,12 @@ li a.loanby-family{
   align-items: center;
   gap: 0.5rem;
 }
+
+.loanby-family.href-btn{
+  font-family: var(--font-sub);
+  margin-top: 0.5rem;
+}
+.loanby-family.href-btn:hover{
+  text-decoration: none;
+  font-weight: 500;
+}
