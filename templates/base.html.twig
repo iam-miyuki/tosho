@@ -50,7 +50,7 @@
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>
 							{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
 								<div class="logout">
-									<a href="{{ path('tosho_home') }}"><img src="{{ asset('img/logout.svg') }}" alt="logout"><span class="menu-text"></span>
+									<a href="{{ path('app_logout') }}"><img src="{{ asset('img/logout.svg') }}" alt="logout"><span class="menu-text"></span>
 									</a>
 								</div>
 							{% endif %}
