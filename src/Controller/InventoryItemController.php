@@ -50,7 +50,7 @@ final class InventoryItemController extends AbstractController
         $currentTab = $request->query->get('tab', 'status');
         $currentInventory = $inventoryRepository->findWithItems($inventory->getId()); // besoin de récupérer avec inventoryItems
         $checkedItems = $inventoryItemRepository->findAllByInventory($inventory);
-
+   
         $location = $inventory->getLocation();
         $noCheckedBooks = $bookRepository->findNoInventory($inventory->getId(), $location);
         $allBooksByLocation = $bookRepository->findAllByLocation($location);
@@ -149,6 +149,8 @@ final class InventoryItemController extends AbstractController
             throw $this->createNotFoundException('InventoryItem non trouvé.');
         }
         $checkedItems = $inventoryItemRepository->findAllByInventory($inventory);
+
+     
         $location = $inventory->getLocation();
         $noCheckedBooks = $bookRepository->findNoInventory($inventory->getId(), $location);
         $allBooksByLocation = $bookRepository->findAllByLocation($location);
