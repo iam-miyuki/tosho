@@ -6,10 +6,12 @@ use App\Entity\Book;
 use App\Enum\LocationEnum;
 use App\Form\Book\BookForm;
 use App\Enum\BookStatusEnum;
+use App\Enum\LoanStatusEnum;
 use App\Form\Book\FindBookForm;
 use App\Form\Book\BookFilterForm;
 use App\Form\Book\EditBookForm;
 use App\Repository\BookRepository;
+use App\Repository\LoanRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +27,7 @@ final class BookController extends AbstractController
     {
         do {
             $code = (string) random_int(1000, 9999);
-            $existingBook = $bookRepository->findOneBy(['code' => $code]);
+            $existingBook = $bookRepository->findOneByCode($code);
         } while ($existingBook !== null); //pour générer le code qui n'est pas encore attribué à un livre
         return $code;
     }
@@ -34,7 +36,7 @@ final class BookController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $em,
-        BookRepository $bookRepository
+        BookRepository $bookRepository,
     ): Response {
         $currentTab = $request->query->get('tab', 'search');
         $book = new Book();
@@ -67,46 +69,50 @@ final class BookController extends AbstractController
             'badet' => $badet,
         ];
 
-        if ($request->isMethod('POST')) {
-            if ($filterForm->isSubmitted()) {
-                $keyword = $filterForm->get('filter')->getData();
-                $results = $bookRepository->findAllWithFilterQuery($keyword);
-                return $this->render('Admin/book/index.html.twig', array_merge($sharedData, [
+        if (!$request->isMethod('POST')) {
+            return $this->render(
+                'admin/book/index.html.twig',
+                array_merge($sharedData, [
+                    'tab' => $currentTab,
                     'books' => $results,
-                    'tab' => 'search'
-                ]));
-            }
-            if ($findBookForm->isSubmitted()) {
-                $code = $findBookForm->get('code')->getData();
-                $currentBook = $bookRepository->findOneByCode($code);
-                return $this->redirectToRoute('admin-show-book', [
-                    'id' => $currentBook->getId()
-                ]);
-            }
-            if ($form->isSubmitted() && $form->isValid()) {
-                $book = $form->getData();
-                $book->setAddedAt(new \DateTimeImmutable());
-                $book->setStatus(BookStatusEnum::available);
-                $code = $this->generateUniqueCode($bookRepository);
-                $book->setCode($code);
-                $em->persist($book);
-                $em->flush();
-                return $this->render('Admin/book/index.html.twig', array_merge($sharedData, [
-                    'addedBook' => $book,
-                    'tab' => 'new',
-                    'successMessage' => 'Le livre a été ajouté avec succès'
-                ]));
-            }
+                    'currentBook' => $currentBook,
+                    'addedBook' => null,
+                ])
+            );
         }
-        return $this->render(
-            'Admin/book/index.html.twig',
-            array_merge($sharedData, [
-                'tab' => $currentTab,
+
+        if ($filterForm->isSubmitted()) {
+            $keyword = $filterForm->get('filter')->getData();
+            $results = $bookRepository->findAllWithFilterQuery($keyword);
+            return $this->render('admin/book/index.html.twig', array_merge($sharedData, [
                 'books' => $results,
-                'currentBook' => $currentBook,
-                'addedBook' => null
-            ])
-        );
+                'tab' => 'search'
+            ]));
+        }
+
+        if ($findBookForm->isSubmitted()) {
+            $code = $findBookForm->get('code')->getData();
+            $currentBook = $bookRepository->findOneByCode($code);
+            return $this->redirectToRoute('admin-show-book', [
+                'id' => $currentBook->getId()
+            ]);
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $book = $form->getData();
+            $book->setAddedAt(new \DateTimeImmutable());
+            $book->setStatus(BookStatusEnum::available);
+            $code = $this->generateUniqueCode($bookRepository);
+            $book->setCode($code);
+            $em->persist($book);
+            $em->flush();
+            return $this->render('admin/book/index.html.twig', array_merge($sharedData, [
+                'addedBook' => $book,
+                'tab' => 'new',
+                'successMessage' => 'Le livre a été ajouté avec succès'
+            ]));
+        }
+        return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     #[Route('/{id}', name: 'admin-show-book')]
@@ -128,7 +134,7 @@ final class BookController extends AbstractController
         $mba = $bookRepository->findAllByLocation(LocationEnum::mba);
         $badet = $bookRepository->findAllByLocation(LocationEnum::badet);
 
-        return $this->render('Admin/book/index.html.twig', [
+        return $this->render('admin/book/index.html.twig', [
             'currentBook' => $book,
             'tab' => 'search',
             'filterForm' => $filterForm->createView(),
@@ -175,39 +181,42 @@ final class BookController extends AbstractController
             'badet' => $badet,
         ];
 
-        if ($request->isMethod('POST')) {
-            if ($editForm->isSubmitted() && $editForm->isValid()) {
-                $code = $editForm->get('code')->getData();
-                $existingBook = $bookRepository->findOneByCode($code);
-
-                if ($existingBook == null || $existingBook->getId() === $book->getId()) {
-                    $em->flush();
-                    return $this->render(
-                        'Admin/book/index.html.twig',
-                        array_merge($sharedData, [
-                            'modifiedBook' => $book,
-                            'tab' => 'search',
-                            'successMessage' => 'Le livre a été modifié avec succès'
-                        ])
-                    );
-                } else {
-                    return $this->render(
-                        'Admin/book/index.html.twig',
-                        array_merge($sharedData, [
-                            'tab' => 'search',
-                            'erreurCodeBook' => $book
-                        ])
-                    );
-                }
-            }
+        if (!$request->isMethod('POST')) {
+            return $this->render(
+                'admin/book/index.html.twig',
+                array_merge($sharedData, [
+                    'bookToEdit' => $book,
+                    'tab' => 'search'
+                ])
+            );
         }
-        return $this->render(
-            'Admin/book/index.html.twig',
-            array_merge($sharedData, [
-                'bookToEdit' => $book,
-                'tab' => 'search'
-            ])
-        );
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $code = $editForm->get('code')->getData();
+            $existingBook = $bookRepository->findOneByCode($code);
+
+            if ($existingBook === null || $existingBook->getId() === $book->getId()) {
+                $em->flush();
+                return $this->render(
+                    'admin/book/index.html.twig',
+                    array_merge($sharedData, [
+                        'modifiedBook' => $book,
+                        'tab' => 'search',
+                        'successMessage' => 'Le livre a été modifié avec succès'
+                    ])
+                );
+            }
+
+            return $this->render(
+                'admin/book/index.html.twig',
+                array_merge($sharedData, [
+                    'tab' => 'search',
+                    'erreurCodeBook' => $book
+                ])
+            );
+        }
+
+        return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     #[Route('/delete/{id}', name: 'delete-book')]
@@ -240,9 +249,21 @@ final class BookController extends AbstractController
             'badet' => $badet,
         ];
 
+        if (!$request->isMethod('POST')) {
+            return $this->render(
+                'admin/book/index.html.twig',
+                array_merge(
+                    $sharedData,
+                    [
+                        'bookToDelete' => $book,
+                    ]
+                )
+            );
+        }
+
         if ($book->getStatus() !== BookStatusEnum::available) {
             return $this->render(
-                'Admin/book/index.html.twig',
+                'admin/book/index.html.twig',
                 array_merge(
                     $sharedData,
                     [
@@ -252,28 +273,16 @@ final class BookController extends AbstractController
             );
         }
 
-        if ($request->isMethod('POST')) {
-            $em->remove($book);
-            $em->flush();
-
-            return $this->render(
-                'Admin/book/index.html.twig',
-                array_merge(
-                    $sharedData,
-                    [
-                        'deletedBook' => $book,
-                        'successMessage' => 'Le livre a été supprimé avec succès'
-                    ]
-                )
-            );
-        }
+        $em->remove($book);
+        $em->flush();
 
         return $this->render(
-            'Admin/book/index.html.twig',
+            'admin/book/index.html.twig',
             array_merge(
                 $sharedData,
                 [
-                    'bookToDelete' => $book,
+                    'deletedBook' => $book,
+                    'successMessage' => 'Le livre a été supprimé avec succès'
                 ]
             )
         );

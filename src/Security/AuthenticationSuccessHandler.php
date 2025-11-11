@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
 
-// redirection apres login selon role. à voir aussi services.yaml et secuity.yaml
+// redirection apres login selon rôle. à voir aussi services.yaml et secuity.yaml
 class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
     private RouterInterface $router;
@@ -28,9 +28,9 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         }
 
         if (in_array('ROLE_LIBRARIEN', $roles, true)) {
-            return new RedirectResponse($this->router->generate('librarien'));
+            return new RedirectResponse($this->router->generate('librarien_home'));
         }
 
-        return new RedirectResponse($this->router->generate('account'));
+        return new RedirectResponse($this->router->generate('login'));
     }
 }

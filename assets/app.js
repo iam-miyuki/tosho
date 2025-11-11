@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activeButtons.forEach((button) => {
     button.addEventListener("click", async () => {
       const route = button.dataset.href;
-        // console.log(route)
+      // console.log(route)
       try {
         const response = await fetch(route);
         if (!response.ok) {
@@ -55,7 +55,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  
 });
-

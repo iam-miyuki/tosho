@@ -1,11 +1,12 @@
-<div class="card one-card add-wrapper">
+<div class="card one-card add-wrapper checked-item">
 	<div class="card-title card-title-family">
 		<h4>
 			Livre déjà vérifié
 		</h4>
 	</div>
 	<div class="card-body">
-	<img class="book-cover" src="{{ asset('img/child-book.svg') }}" alt="book-for-child">
+	<img class="book-cover" src="{{ currentBook.coverUrl ? asset(currentBook.coverUrl) : asset('img/child-book.svg') }}" 
+			alt="{{ currentBook.coverUrl ? currentBook.title : 'book-for-child' }}">
 		<div class="detail">
 			<div class="detail-item detail-book item-label">
 				<p>Code</p>
@@ -39,12 +40,21 @@
 			</div>
 		</div>
 	</div>
-	{{ form_start(editForm) }}
-	{{ form_widget(editForm.status, {'attr': {'class': 'form-field enum-field'}}) }}
-	{{ form_widget(editForm.note, {'attr': {'class': 'form-field'}}) }}
-	<div class="btn-wrapper">
-		<button class="btn-form" type="submit">Modifier</button>
-		<div class="href-btn cancel-btn"><a href="{{path('inventory-page',{id:currentBook.id, tab:'check'})}}">Annuler</a></div>
-	</div>
-	{{ form_end(editForm) }}
+	 {{ form_start(editForm) }}
+
+    <div class="form-item column-mb">
+        {{ form_label(editForm.status, 'État d’inventaire :', {'label_attr': {'class': 'item-label'}}) }}
+        {{ form_widget(editForm.status, {'attr': {'class': 'form-field enum-field'}}) }}
+    </div>
+
+    <div class="form-item column-mb">
+        {{ form_label(editForm.note, 'Commentaire :', {'label_attr': {'class': 'item-label'}}) }}
+        {{ form_widget(editForm.note, {'attr': {'class': 'form-field'}}) }}
+    </div>
+
+    <div class="btn-wrapper">
+        <button class="btn-form" type="submit">Valider</button>
+    </div>
+
+    {{ form_end(editForm) }}
 </div>

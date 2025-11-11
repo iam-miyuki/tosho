@@ -1,0 +1,32 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+	<div class="page-title">
+		<h2>Gestion des inventaires</h2>
+		<img src="{{ asset('img/books.svg') }}" alt="inventory">
+	</div>
+	<div class="tab-container">
+		<div class="tabs">
+			<a href="{{ path('inventory', {tab: 'search'}) }}" class="tab left-tab admin-tab search-tab {{ tab == 'search' ? 'active' : '' }}">
+				<div class="tab-icon"></div>Chercher
+			</a>
+			<a href="{{ path('inventory', {tab: 'new'}) }}" class="tab right-tab admin-tab new-tab {{ tab == 'new' ? 'active' : '' }}">
+				<div class="tab-icon"></div>Ajouter
+			</a>
+		</div>
+
+		{# tab 'search' #}
+		<div class="tab-content left-tab admin-tab search-tab {{ tab == 'search' ? 'active' : '' }}">
+			{% if tab == 'search' %}
+				{% include 'admin/inventory/search-form.html.twig' %}
+			{% endif %}
+		</div>
+
+		{# tab 'new' #}
+		<div class="tab-content right-tab admin-tab new-tab {{ tab == 'new' ? 'active' : '' }}">
+			{% if tab == 'new' %}
+				{% include 'admin/inventory/form.html.twig'%}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+<div class="card one-card success-card">
+
+	<div class="card-title">
+		{{successMessage}}
+	</div>
+	<div class="icon-success"></div>
+	{% if addedInventory is defined and addedInventory is not null %}
+		<div class="btn-wrapper">
+			<div class="href-btn">
+				<a href="{{path('show-inventory',{tab:'search',id:addedInventory.id})}}">Voir</a>
+			</div>
+			<div class="href-btn">
+				<a href="{{path('inventory',{tab:'new'})}}">Créer un autre inventaire</a>
+			</div>
+			<div class="href-btn">
+				<a href="{{path('inventory',{tab:'search'})}}">Retour</a>
+			</div>
+		</div>
+	{% elseif modifiedInventory is defined and modifiedInventory is not null %}
+		<div class="btn-wrapper">
+			<div class="href-btn">
+				<a href="{{path('show-inventory',{tab:'search',id:modifiedInventory.id})}}">Voir</a>
+			</div>
+			<div class="href-btn">
+				<a href="{{path('inventory',{tab:'search'})}}">Retour</a>
+			</div>
+		</div>
+	{% else %}
+		<div class="btn-wrapper">
+			<div class="href-btn">
+				<a href="{{path('inventory',{tab:'search'})}}">Retour</a>
+			</div>
+		</div>
+	{% endif %}
+</div>

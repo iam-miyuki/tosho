@@ -3,7 +3,8 @@
 		{% for item in checked %}
 			<div class="card">
 				<div class="card-body">
-					<img class="book-cover" src="{{ asset('img/child-book.svg') }}" alt="book-for-child">
+					<img class="book-cover" src="{{ item.book.coverUrl ? asset(item.book.coverUrl) : asset('img/child-book.svg') }}" 
+			alt="{{ item.book.coverUrl ? item.book.title : 'book-for-child' }}">
 					<div class="detail book-details">
 						<p>Statut :
 							{{ item.status.value }}</p>
@@ -21,9 +22,9 @@
 					</div>
 				</div>
 				<div class="href-btn">
-					<a href="{{path('edit-item',{tab:'new',id:item.id})}}">Changer statut</a>
+					<a href="{{path('edit-item',{tab:'check',id:currentInventory.id, item:item.id})}}">Changer statut</a>
 				</div>
 			</div>
 		{% endfor %}
-	
 </div>
+	<a href="{{ path('inventory-page', {id:currentInventory.id}) }}" class="href-btn cancel-btn">Retour</a>

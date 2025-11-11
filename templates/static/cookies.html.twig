@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tosho
+{% endblock %}
+
+{% block body %}
+	<div class="static">
+		<h3>Politique de cookies</h3>
+
+		<p>Dernière mise à jour :
+			{{ "now"|date("m/Y") }}</p>
+
+		<p>
+			Ce site utilise des cookies pour améliorer votre expérience utilisateur et réaliser des statistiques de visites.
+			    Vous pouvez configurer votre navigateur pour refuser ou supprimer les cookies.
+		</p>
+
+		<h3>Cookies utilisés</h3>
+		<ul>
+			<li>
+				<strong>Cookies essentiels :</strong>
+				nécessaires au fonctionnement du site.</li>
+			<li>
+				<strong>Cookies analytiques :</strong>
+				utilisés pour mesurer le trafic et améliorer le contenu.</li>
+		</ul>
+
+		<h3>Gestion des cookies</h3>
+		<p>
+			Vous pouvez modifier vos préférences dans votre navigateur à tout moment. Pour en savoir plus, consultez la documentation de votre navigateur.
+		</p>
+	</div>
+{% endblock %}

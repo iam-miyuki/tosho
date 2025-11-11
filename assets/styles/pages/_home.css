@@ -1,0 +1,37 @@
+.tosho-home .img-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.tosho-home .img-wrapper img:first-child{
+    width: 300px;
+}
+.tosho-home .img-wrapper img:last-child{
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tosho-home h1{
+    font-size: var(--font-l);
+}
+.tosho-home .subtext{
+    font-weight: 600;
+}
+@media (max-width:768px) {
+    .tosho-home{
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    .tosho-home .img-wrapper img:first-child{
+        width: 200px;
+    }
+    .tosho-home .img-wrapper img:last-child{
+    width: 100px;
+    }
+}

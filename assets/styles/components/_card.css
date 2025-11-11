@@ -13,6 +13,9 @@
 .card.home-card{
   width: 18rem;
 }
+.card.home-card img{
+  width: 80px;
+}
 @media (max-width: 768px) {
   .card.home-card{
     font-size: var(--font-xs);
@@ -22,25 +25,46 @@
   }
   .card img.book-cover{
     width: 40px;
+    height: 40px;
   }
   .card{
-    width: max-content;
     margin-left: auto;
     margin-right: auto;
     font-size: var(--font-s);
     padding: 1rem;
-
+    width: max-content;
+  }
+  .card.one-card.alert-card{
+    width: 90%;
+  }
+  .tab-content .card{
+    width: auto;
   }
 
+.card.home-card img{
+  width: 60px;
+}
 }
 .card.one-card{
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3rem;
+  margin-top: 1rem;
+}
+.card.one-card.alert-card{
+  margin-top: 0rem;
 }
 .inventory-card{
-  background-color: transparent;
-  border: none;
+  background-color: var(--color-cards);
+
+}
+
+.inventory-card .book-details{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card.checked-item{
+  background-color: var(--color-cameleon);
 }
 .cards-wrapper {
   max-width: 100%;
@@ -74,11 +98,13 @@
   display: block;
 }
 .cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  display: flex;
   gap: 1.5rem;
   justify-items: center;
   padding: 1rem 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
 }
 @media (max-width:768px) {
   .cards-container{
@@ -148,17 +174,30 @@
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
+@media (max-width:768px) {
+ .form-item .item-field{
+  width:auto;
+  margin-right: 0.2rem;
+  padding: 0;
+ }
+}
 .form-item p{
   margin-top: auto;
   margin-bottom: auto;
   line-height: 100%;
-  margin-right: 0.5rem;
+ 
 }
 
 img.book-cover {
   width: 80px;
-  height: 100px;
+  height: 80px;
   background-color:white;
+}
+@media (max-width:768px) {
+  img.book-cover{
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .card-title{
@@ -188,6 +227,7 @@ img.book-cover {
 .home-card:hover {
   transform: translateY(-6px);
   background-color: var(--color-btn-hover);
+  transition: 0.3s ease;
 }
 
 .alert-card{
@@ -206,26 +246,26 @@ img.book-cover {
   display: inline-block;
   width: 25px;
   height: 25px;
-  background-image: url(../../img/pencil.svg);
+  background-image: url("../../img/pencil.svg");
   background-size: cover;
 }
 .card-header .delete-icon a{
   display: inline-block;
   width: 25px;
   height: 25px;
-  background-image: url(../../img/trush.svg);
+  background-image: url("../../img/trush.svg");
   background-size: cover;
 }
 
 .card-header .edit-icon a:hover{
   width: 28px;
   height: 28px;
-  background-image: url(../../img/edit-hover.svg);
+  background-image: url("../../img/edit-hover.svg");
 }
 .card-header .delete-icon a:hover{
   width: 28px;
   height: 28px;
-  background-image: url(../../img/trush-hover.svg);
+  background-image: url("../../img/trush-hover.svg");
 }
 /* .card-header .edit img{
   
@@ -234,7 +274,14 @@ img.book-cover {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url(../../img/happy.svg);
+  background-image: url("../../img/happy.svg");
+  background-size: cover;
+}
+.icon-not-found {
+  background-image: url("../../img/ghost.svg");
+  display: inline-block;
+  width: 30px;
+  height: 30px;
   background-size: cover;
 }
 .success-card{
@@ -251,17 +298,15 @@ img.book-cover {
     align-items: center;
   }
 }
-.alert-card{
-  background-color: var(--color-alert);
-}
+
 .icon-alert{
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url(../../img/neutral.svg);
+  background-image: url("../../img/neutral.svg");
   background-size: cover;
 }
-.add-wrapper{
+.edit-wrapper{
   background-color: var(--color-badet);
 }
 .form-wrapper{

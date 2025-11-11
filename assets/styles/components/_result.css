@@ -47,6 +47,7 @@
 }
 .no-result.no-loan{
   border: solid 1px var(--color-text);
+  margin-bottom: 1rem;
 }
 
 @media (max-width:768px) {
@@ -68,4 +69,18 @@
 }
 .result-icon.happy{
   background-image: url(../../img/happy.svg);
+}
+li a.loanby-family{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loanby-family.href-btn{
+  font-family: var(--font-sub);
+  margin-top: 0.5rem;
+}
+.loanby-family.href-btn:hover{
+  text-decoration: none;
+  font-weight: 500;
 }

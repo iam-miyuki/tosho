@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tosho
+{% endblock %}
+
+{% block body %}
+<div class="tosho-home">
+  <div class="img-wrapper">
+      <img src="{{ asset('img/logo-big.svg') }}" alt="Logo Tosho" class="tosho-logo">
+      <img src="{{ asset('img/child-book.svg') }}" alt="child book" class="child-book">
+  </div>
+  <h2>Bienvenue sur <strong>Tosho</strong></h2>
+  <p class="intro">
+    L’application web dédiée à la gestion des prêts de livres pour une école japonaise.
+  </p>
+
+  <p class="subtext">
+    Connectez-vous pour commencer !
+  </p>
+
+  <a href="{{ path('app_login') }}" class="href-btn">Se connecter</a>
+</div>
+
+{% endblock %}

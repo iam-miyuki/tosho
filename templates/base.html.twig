@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Tosho
 			{% endblock %}
 		</title>
 		<!-- Import Google Fonts -->
@@ -13,6 +13,17 @@
 		<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"> {% block stylesheets %}{% endblock %}
 
+		<!-- Pour un favicon .ico -->
+		<link
+		rel="icon" href="{{ asset('img/favicon/favicon.ico') }}" type="image/x-icon">
+
+		<!-- Pour un favicon .svg -->
+		<link
+		rel="icon" href="{{ asset('img/favicon/favicon.svg') }}" type="image/svg+xml">
+
+		<!-- Optionnel : pour Apple Touch (iPhone/iPad) -->
+		<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
+
 		{% block javascripts %}
 			{% block importmap %}
 				{{ importmap('app') }}
@@ -20,29 +31,40 @@
 		{% endblock %}
 	</head>
 	<body class="librarien-body">
+
 		{% block header %}
 			<div class="page-wrapper">
 				<div class="header">
 					<div class="header-top">
-						<a href="{{ path('home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"></a>
+						{% if is_granted('ROLE_LIBRARIEN') %}
+							<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"><h1>Tosho</h1>
+							</a>
+						{% elseif is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('admin_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"><h1>Tosho</h1>
+							</a>
+						{% else %}
+							<a href="{{ path('tosho_home') }}"><img src="{{ asset('img/logo-big.svg') }}" alt="logo"><h1>Tosho</h1>
+							</a>
+						{% endif %}
 						<div class="logout-wrapper">
 							<p class="sub-title">Application de gestion de bibliothèque pour école japonaise</p>
 							{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
-							<div class="logout">
-								<a href="{{ path('app_logout') }}"><img src="{{ asset('img/logout.svg') }}" alt="logout"><span class="menu-text"></span>
-								</a>
-							</div>
+								<div class="logout">
+									<a href="{{ path('app_logout') }}"><img src="{{ asset('img/logout.svg') }}" alt="logout"><span class="menu-text"></span>
+									</a>
+								</div>
 							{% endif %}
 						</div>
 					</div>
 
-					<nav>
-						<h2>Gérez les prêts de livres en toute simplicité</h2>
-						{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
+
+					{% if is_granted('ROLE_LIBRARIEN') or is_granted('ROLE_ADMIN') %}
+						<nav>
+							<h2>Gérez les prêts de livres en toute simplicité</h2>
 
 							<ul class="menu menu-librarien">
 								<li class="menu-item">
-									<a href="{{ path('home') }}"><img src="{{ asset('img/home.svg') }}" alt="home"><span class="menu-text">Home</span>
+									<a href="{{ path('librarien_home') }}"><img src="{{ asset('img/home.svg') }}" alt="home"><span class="menu-text">Home</span>
 									</a>
 								</li>
 								<li class="menu-item">
@@ -61,17 +83,28 @@
 									</li>
 								{% endif %}
 							</ul>
-						{% endif %}
-					</nav>
+						</nav>
+					{% else %}
+						<nav class="visitor-nav">
+							<h2 class="visitor-subtitle">Gérez les prêts de livres en toute simplicité</h2>
+						</nav>
+					{% endif %}
 					{% if is_granted('ROLE_ADMIN') %}
-						<div class="switch admin">
-							<a href="{{path('admin_home')}}">Espace Admin</a>
-						</div>
+
+						<a href="{{path('admin_home')}}">
+							<div class="switch admin">
+								<div class="switch-icon"></div>
+								<div>
+									Espace Admin
+								</div>
+							</div>
+						</a>
 					{% endif %}
 					{# <a href="{{ path('switch_locale') }}">en</a> #}
 				</div>
 			{% endblock %}
 			<main>
+
 				{% block body %}{% endblock %}
 			</main>
 		</div>
@@ -80,10 +113,29 @@
 			<div class="footer">
 				<hr>
 				<div class="footer-content">
-					<img src="{{ asset('img/logo-small.svg') }}" alt="logo">
-					<p>Gestion des prêts de livres pour école japonaise</p>
+					<a href="{{ path('librarien_home') }}">
+						<div class="footer-logo">
+							<img src="{{ asset('img/logo-small.svg') }}" alt="logo">
+							<p>Gestion des prêts de livres pour école japonaise</p>
+						</div>
+					</a>
+					<div class="footer-contents-wrapper">
+						<div class="contents">
+							<a href="{{ path('privacy') }}">Politique de cofidentialité</a>
+							<a href="{{ path('cookies') }}">Politique de cookies</a>
+							<a href="{{ path('mentions') }}">Mentions légales</a>
+						</div>
+						<div class="contacts">
+							<a href="https://github.com/iam-miyuki" target="_blank" rel="noopener noreferrer"><img class="github" src="{{ asset('img/github.svg') }}" alt="github"></a>
+							<a href="https://www.linkedin.com/in/miyuki-cherbal-b79887366" target="_blank" rel="noopener noreferrer"><img class="linkedin" src="{{ asset('img/linkedin.svg') }}" alt="linkedin"></a>
+						</div>
+					</div>
+					<div>&copy;
+						{{ "now"|date("Y") }}
+						Tosho — All Rights Reserved</div>
 				</div>
 			</div>
 		{% endblock %}
+		{% include "cookie.html.twig" %}
 	</body>
 </html>

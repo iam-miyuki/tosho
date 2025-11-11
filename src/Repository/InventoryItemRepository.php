@@ -43,19 +43,19 @@ class InventoryItemRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findAllByInventoryAndStatus(Inventory $inventory, InventoryItemStatusEnum $status)
-    {
-        $qb = $this->createQueryBuilder('ii');
-        $qb
-            ->addSelect('user')
-            ->leftJoin('ii.user', 'user')
-            ->andWhere('ii.inventory = :inventory')
-            ->andWhere('ii.status = :status')
-            ->setParameter('inventory', $inventory)
-            ->setParameter('status', $status->value)
-        ;
-        return $qb->getQuery()->getResult();
-    }
+    //public function findAllByInventoryAndStatus(Inventory $inventory, InventoryItemStatusEnum $status)
+    //{
+//        $qb = $this->createQueryBuilder('ii');
+      //  $qb
+        //    ->addSelect('user')
+          //  ->leftJoin('ii.user', 'user')
+          //  ->andWhere('ii.inventory = :inventory')
+            //->andWhere('ii.status = :status')
+            //->setParameter('inventory', $inventory)
+            //->setParameter('status', $status->value)
+        //;
+        //return $qb->getQuery()->getResult();
+ //   }
 
     public function findAllByInventoryAndNotOkStatus(Inventory $inventory): array
     {

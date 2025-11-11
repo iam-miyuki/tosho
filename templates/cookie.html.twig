@@ -1,0 +1,53 @@
+{# Affiche le bandeau uniquement si le cookie n'existe pas encore #}
+{% set consent = app.request.cookies.get('tosho_cookie_consent') %}
+{% if consent is null %}
+<div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-content">
+        <h3>Nous respectons votre vie privée <img src="{{ asset('img/cookie.svg') }}" alt="cookie"></h3>
+        <p>
+            Ce site utilise des cookies uniquement pour améliorer votre expérience de navigation.
+            Vous pouvez accepter ou refuser à tout moment.
+        </p>
+        <div class="cookie-buttons">
+            <button class="pri-btn" id="acceptCookies">Tout accepter</button>
+            <button class="sec-btn" id="rejectCookies">Tout refuser</button>
+            <a href="{{ path('cookies') }}" class="link">En savoir plus</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('acceptCookies');
+    const rejectBtn = document.getElementById('rejectCookies');
+
+    if (!banner) return;
+
+    const setCookie = (name, value, days) => {
+        const expires = new Date(Date.now() + days * 864e5).toUTCString();
+        document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+    };
+
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => {
+            setCookie('tosho_cookie_consent', 'accepted', 180);
+            banner.classList.add('hide');
+            setTimeout(() => banner.remove(), 400);
+        });
+    }
+
+    if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => {
+            setCookie('tosho_cookie_consent', 'rejected', 180);
+            banner.classList.add('hide');
+            setTimeout(() => banner.remove(), 400);
+        });
+    }
+});
+</script>
+
+
+
+

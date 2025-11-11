@@ -1,0 +1,45 @@
+{% if page is defined and page == 'checked' %}
+	{% include "admin/inventory/checked.html.twig" %}
+{% elseif page is defined and page == 'not-ok' %}
+	{% include "admin/inventory/notOk.html.twig" %}
+{% elseif itemToEdit is defined and itemToEdit is not null %}
+	{% include "admin/inventory/edit-item.html.twig" %}
+{% else %}
+	<div class="card one-card inventory-card">
+		<div class="detail book-details">
+		<h3>Nom d'inventaire : {{ currentInventory.name ? currentInventory.name : "" }}</h3>
+			<h3>Date :
+				{{ currentInventory.date|date('d/m/Y') }}</h3>
+			<h3>Lieu :
+				<div class="location location-inventory">{{ currentInventory.location.value }}</div>
+			</h3>
+			{% if currentInventory.note is not null %}
+				<p>Commentaire :
+					{{ currentInventory.note }}</p>
+			{% endif %}
+		</div>
+
+
+		<div class="btn-card-wrapper">
+			<div>
+				<a href="{{ path('admin-items', { id: currentInventory.id,page:'checked' }) }}">
+					<div class="btn-card">
+						<p>Livres vérifiés :
+							{{items | length}}
+						</p>
+					</div>
+				</a>
+			</div>
+			<div>
+				<a href="{{ path('admin-items', { id: currentInventory.id,page:'not-ok' }) }}">
+					<div class="btn-card">
+						<p>Livres signalés :
+							{{notOkItems| length}}
+						</p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<a href="{{ path('inventory', {tab:'search'}) }}" class="href-btn cancel-btn">Retour</a>
+{% endif %}

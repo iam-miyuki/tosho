@@ -1,0 +1,44 @@
+{% if currentInventory is defined and currentInventory is not null %}
+	{% include "admin/inventory/inventory-page.html.twig" %}
+
+{% elseif inventoryToEdit is defined and inventoryToEdit is not null %}
+	{% include "admin/inventory/edit.html.twig" %}
+
+{% elseif modifiedInventory is defined and modifiedInventory is not null %}
+	{% include "admin/inventory/success.html.twig" %}
+{% elseif inventoryToConfirm is defined and inventoryToConfirm is not null %}
+	{% include "admin/inventory/delete.html.twig" %}
+{% elseif inventoryInProgress is defined and inventoryInProgress is not null %}
+	{% include "admin/inventory/error.html.twig" %}
+{% else %}
+
+	<div class="forms-wrapper filter-form">
+
+		<div>
+			<h4>Filtrer les inventaires</h4>
+			{{ form_start(filterForm, {
+			'action': path('inventory'),
+			'method': 'POST'
+		  }) }}
+
+			<div class="filter-item">
+				<p>Statut :
+				</p>
+
+				{{ form_widget(filterForm.status, {'attr': {'class': 'form-field enum-field'}}) }}
+			</div>
+			<div class="filter-item">
+				<p>Lieu :
+				</p>
+
+				{{ form_widget(filterForm.location, {'attr': {'class': 'form-field enum-field'}}) }}
+			</div>
+			<button type="submit" class="btn">Chercher</button>
+			{{ form_end(filterForm) }}
+		</div>
+	</div>
+
+	{% if inventories is defined and inventories is not null %}
+		{% include "admin/inventory/inventory-list.html.twig" %}
+	{% endif %}
+{% endif %}

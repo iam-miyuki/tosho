@@ -96,10 +96,89 @@ Jusqu’à présent, la gestion repose sur une application dévéloppé par un a
 
 ## 7. 🌱 Évolutions futures (V2)
 
+- 🔍 Recherche interactive avec **AJAX** : affichage automatique des suggestions lors de la saisie (ex. recherche par nom sans appuyer sur "Chercher")  
 - 📬 Envoi d’e-mails de rappel pour les retours en retard  
 - 📌 Réservation des livres  
 - 🌏 Interface multilingue (français / japonais)  
 - 🗓️ Planning des parents bibliothécaires  
 
 ---
+
+
+# 🚀 Documentation MEP (Mise en Production)
+
+## 🧩 Prérequis
+
+- Accès SSH au serveur distant  
+- Docker et Docker Compose installés  
+- Accès au dépôt GitHub du projet  
+- Fichier `.env.prod` ou `.env.dev` configuré  
+
+---
+
+## ⚙️ Étapes de déploiement
+
+1. **Se connecter au serveur via SSH**
+
+   ````bash
+   ssh username@adresse_ip
+   ````
+
+2. **Créer un répertoire pour le déploiement**
+````bash
+mkdir tosho && cd tosho
+````
+
+3. **Cloner le projet depuis GitHub**
+
+```bash
+git clone https://github.com/iam-miyuki/tosho.git .
+```
+
+4. **Copier le fichier d’environnement**
+
+```bash
+cp .env.prod .env
+```
+(ou utiliser ``.env.dev`` selon l’environnement choisi)
+
+5. **Lancer le build et les conteneurs**
+```bash
+make prod
+```
+(ou ``make dev`` pour un environnement de développement — voir le fichier Makefile)
+
+6. Restaurer la base de données
+
+symfony console doctrine:database:create --if-not-exists
+symfony console doctrine:migrations:migrate --no-interaction
+
+(ou importer un dump SQL si disponible)
+
+## 💡 Commandes utiles
+
+- **Ouvrir un terminal dans le conteneur de l’application**
+```bash
+docker exec -it tosho-app-1 bash
+```
+
+- **Vider le cache**
+
+```bash
+php bin/console cache:clear
+```
+
+- **Mettre à jour la base de données**
+```bash
+symfony console doctrine:schema:update --force
+```
+
+- **Afficher les logs**
+```bash
+docker logs -f tosho-app-1
+```
+
+
+
+
 

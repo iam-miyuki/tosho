@@ -2,28 +2,28 @@
 	{% include "account/success.html.twig" %}
 {% else %}
 	<div class="forms-wrapper">
-		<div>
-			<h4>Changer le mot de passe</h4>
+		<div class="change-form">
+			<h4 class="name-container section-name yellow">Changer le mot de passe</h4>
 			{{ form_start(pwdForm, {
     'action': path('change-pwd'),
     'method': 'POST'
   }) }}
 			<div class="form-item">
-				<p>Mot de passe actuel</p>
+				<p>Mot de passe actuel : </p>
 				<div class="item-field">
-					:
+					
 					{{ form_widget(pwdForm.password, {'attr': {'class': 'form-field search-input'}}) }}</div>
 			</div>
 			<div class="form-item">
-				<p>Nouveau mot de passe</p>
+				<p>Nouveau mot de passe : </p>
 				<div class="item-field">
-					:
+					
 					{{ form_widget(pwdForm.newPwd, {'attr': {'class': 'form-field search-input', 'placeholder':''}}) }}</div>
 			</div>
 			<div class="form-item">
-				<p>Confirmez le nouveau mot de passe</p>
+				<p>Confirmer le mot de passe : </p>
 				<div class="item-field">
-					:
+					
 					{{ form_widget(pwdForm.confirm, {'attr': {'class': 'form-field search-input', 'placeholder':''}}) }}</div>
 			</div>
 			<div class="btn-wrapper">

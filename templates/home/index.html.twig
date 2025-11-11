@@ -1,18 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home Bibliothécaire
+{% endblock %}
 
 {% block body %}
 	<div class="home-container">
 		<div class="page-title">
-			<h3>Home - Bibliothécaire</h3>
+			<h2>Home - Bibliothécaire</h2>
+		</div>
+		<div class="inventory-loan-status">
+			<ul>
+				<li>
+				<div class="total-loan-icon"></div>
+					Total des prêts en cours :
+					{{ activeLoans|length }}</li>
+				<li>
+				<div class="overdue-icon"></div>
+					Retours en retard :
+					{{ overdueLoans|length }}
+					<a href="{{path('overdue')}}">
+						<div class="icon-right"></div>
+						<div>
+							Voir
+						</div>
+					</a>
+				</li>
+			</ul>
 		</div>
 		<div class="home-cards-wrapper">
 			<div>
 				<a href="{{ path('loan') }}">
 					<div class="card home-card">
 						<div class="card-title">Prêts & Retours</div>
-						<img class="menu-icon" src="{{ asset('img/child-book.svg') }}" alt="loan" />
+						<img class="menu-icon" src="{{ asset('img/child-book.svg') }}" alt="loan"/>
 					</div>
 				</a>
 			</div>
@@ -20,7 +40,7 @@
 				<a href="{{ path('inventory-home') }}">
 					<div class="card home-card">
 						<div class="card-title">Inventaire</div>
-						<img class="menu-icon" src="{{ asset('img/books.svg') }}" alt="books" />
+						<img class="menu-icon" src="{{ asset('img/books.svg') }}" alt="books"/>
 					</div>
 				</a>
 			</div>
@@ -29,11 +49,12 @@
 					<a href="{{ path('account') }}">
 						<div class="card home-card">
 							<div class="card-title">Mon compte</div>
-							<img class="menu-icon" src="{{ asset('img/profile-3.svg') }}" alt="profile" />
+							<img class="menu-icon" src="{{ asset('img/profile-3.svg') }}" alt="profile"/>
 						</div>
 					</a>
 				</div>
 			{% endif %}
 		</div>
+		
 	</div>
 {% endblock %}

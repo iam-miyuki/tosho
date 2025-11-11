@@ -1,13 +1,14 @@
 
 	<div class="card">
-		<div class="card-header">
+		<div class="card-header loan-card">
 			<a href="{{path('return-book',{id:loan.id})}}" class="return-book">
 				<img src="{{ asset('img/close.svg') }}" alt="rendre">
 				<span>Rendre</span>
 			</a>
 		</div>
 		<div class="card-body">
-			<img class="book-cover" src="{{ asset('img/child-book.svg') }}" alt="book-for-child">
+			<img class="book-cover" src="{{ loan.book.coverUrl ? asset(loan.book.coverUrl) : asset('img/child-book.svg') }}" 
+			alt="{{ loan.book.coverUrl ? loan.book.title : 'book-for-child' }}">
 			<div class="detail book-details">
 				<p>Code : {{ loan.book.code }}</p>
 				<p>Titre : {{ loan.book.title }}</p>
