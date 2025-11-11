@@ -13,7 +13,7 @@ services:
 
   ### db tosho
   database: 
-    image: mysql:8.0.25
+    image: mysql:8.0.44
     ports:
       - "3306:3306"
     restart: always
@@ -24,14 +24,19 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] # vérifie si le serveur MySQL local est prêt à accepter des connexions
-      interval: 5s
+      interval: 8s
       timeout: 3s
-      retries: 2
+      retries: 3
     networks:
       - symfony_tosho_net
     volumes:
-      - ../.mysql-tosho/data:/var/lib/mysql # : sépare hôte : conteneur. meme si le conteneur est supprimé les données sont sauvegardé localement dans ../.mysql-tosho/data
-      - ../.mysql-tosho/init:/docker-entrypoint-initdb.d #permet d'initialiser la bdd ou d'executer des scripts (anonymyser les données)
+      - ../tosho-data:/var/lib/mysql # : sépare hôte : conteneur. meme si le conteneur est supprimé les données sont sauvegardé localement dans ../.mysql-tosho/data
+      # Options d'init
+      # 1/2
+      #- ./sql:/docker-entrypoint-initdb.d #permet d'initialiser la bdd ou d'executer des scripts (anonymyser les données)
+      # 2/2
+      #- ../dump:/docker-entrypoint-initdb.d #permet d'initialiser la bdd ou d'executer des scripts (anonymyser les données)
+
   ### db tosho
 
   ###> symfony/mailer ###
@@ -51,7 +56,7 @@ services:
   app: 
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     #container_name: tosho_app
     ports: 
       #- "7878:80"
@@ -63,7 +68,7 @@ services:
       mailer:
         condition: service_started
     env_file:
-      - .env.dev
+      - .env
     volumes:
       - .:/var/www/html # Bind mount : code source local (.) est monté dans le conteneur (/var/www/html est le chemin dans le conteneur). à changer en prod
     networks:

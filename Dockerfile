@@ -28,7 +28,7 @@ COPY . .
 
 # Étape 5 : Installer les dépendances Symfony (sans les dev si en prod)
 #RUN composer install 
-RUN composer install --no-scripts --no-interaction --prefer-dist
+#RUN composer install --no-scripts --no-interaction --prefer-dist
 
 # Étape 6 : Droits d’écriture pour Symfony (cache, logs)
 RUN mkdir -p var
@@ -36,8 +36,8 @@ RUN chown -R www-data:www-data var
 RUN chown -R www-data:www-data public
 
 # Build asserts
-RUN php bin/console importmap:install
-RUN php bin/console asset-map:compile
+#RUN php bin/console importmap:install
+#RUN php bin/console asset-map:compile
 
 # Exposer le port PHP-FPM
 EXPOSE 9000
@@ -47,4 +47,13 @@ EXPOSE 8000
 #CMD ["php-fpm"]
 #CMD ["symfony", "serve"]
 # Run built-in server (for dev only)
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+
+# Copie du script dans le conteneur
+COPY init-script.sh /usr/local/bin/init-script.sh
+
+# Donne les droits d’exécution
+RUN chmod +x /usr/local/bin/init-script.sh
+
+# Utilise ton script comme point d’entrée
+CMD ["/usr/local/bin/init-script.sh"]

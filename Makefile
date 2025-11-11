@@ -1,8 +1,12 @@
 help:
 	echo "Cat this file..."
 dev:
-	docker compose -f docker-compose.dev.yaml up --build
+	docker compose -f docker-compose.yaml up --build
 dev-d:
-	docker compose -f docker-compose.dev.yaml up -d
+	docker compose -f docker-compose.yaml up app database mailer --build -d
+prod:
+	docker compose -f docker-compose.yaml up app database mailer nginx --build
+prod-d:
+	docker compose -f docker-compose.yaml up app database mailer nginx --build -d
 down:
-	docker compose -f docker-compose.dev.yaml down
+	docker compose -f docker-compose.yaml down
