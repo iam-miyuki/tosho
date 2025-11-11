@@ -9,9 +9,6 @@ php bin/console asset-map:compile
 
 echo "Fin de l'install Symfony dependences."
 
-echo "warn: .env need to be edited for prod"
-cp .env.dev .env
-
 echo "lancement serveur php"
 exec php -S 0.0.0.0:8000 -t public
 
