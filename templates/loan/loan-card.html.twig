@@ -7,7 +7,7 @@
 			</a>
 		</div>
 		<div class="card-body">
-			<img class="book-cover" src="{{ loan.book.coverUrl ? loan.book.coverUrl : asset('img/child-book.svg') }}" 
+			<img class="book-cover" src="{{ loan.book.coverUrl ? asset(loan.book.coverUrl) : asset('img/child-book.svg') }}" 
 			alt="{{ loan.book.coverUrl ? loan.book.title : 'book-for-child' }}">
 			<div class="detail book-details">
 				<p>Code : {{ loan.book.code }}</p>
