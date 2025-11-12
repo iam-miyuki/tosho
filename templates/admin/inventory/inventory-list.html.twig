@@ -17,19 +17,24 @@
 
 			<div class="card-body">
 				<div class="detail-item">
+					<p>Nom de session :
+						{{ inventory.name}}</p>
 					<p>Date :
 						{{ inventory.date|date('d/m/Y') }}</p>
 					<p>Lieu :
 						{{ inventory.location.value }}</p>
-					<p>Note :
-						{{ inventory.note }}</p>
+					{% if inventory.note is not null %}
+						<p>Commentaire :
+							{{ inventory.note }}</p>
+					{% endif %}
 					<p>Statut :
 						{{ inventory.status.value }}</p>
 				</div>
 			</div>
 			<div class="btn-wrapper">
 				<div class="href-btn">
-					<a href="{{path('show-inventory',{tab:'search',id:inventory.id})}}">Voir <img src="{{ asset('img/right.svg') }}" alt="right"></a>
+					<a href="{{path('show-inventory',{tab:'search',id:inventory.id})}}">Voir
+						<img src="{{ asset('img/right.svg') }}" alt="right"></a>
 				</div>
 			</div>
 		</div>

@@ -17,7 +17,7 @@
 		<div>
 			<h4>Filtrer les inventaires</h4>
 			{{ form_start(filterForm, {
-			'action': path('inventory'),
+			'action': path('inventory',{tab:'family'}),
 			'method': 'POST'
 		  }) }}
 
@@ -38,7 +38,13 @@
 		</div>
 	</div>
 
-	{% if inventories is defined and inventories is not null %}
+	{% if inventories is defined and inventories is not empty %}
 		{% include "admin/inventory/inventory-list.html.twig" %}
+	{% else %}
+		<div class="no-result no-loan">
+			<p>Aucune session d'inventaire</p>
+			<div class="result-icon empty"></div>
+		</div>
 	{% endif %}
+
 {% endif %}

@@ -47,7 +47,7 @@ final class InventoryController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $inventory->setDate(new \DateTime('now'));
+            
             $inventory = $form->getData();
             $em->persist($inventory);
             $em->flush();
@@ -92,7 +92,7 @@ final class InventoryController extends AbstractController
     }
 
     #[Route(
-        '/items/{id}/{page}',
+        '/{id}/items/{page}',
         name: 'admin-items',
         requirements: ['page' => '^(checked|not-ok)$']
     )]
@@ -121,7 +121,7 @@ final class InventoryController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'edit-inventory')]
+    #[Route('/{id}/edit', name: 'edit-inventory')]
     public function edit(
         Inventory $inventory,
         Request $request,
@@ -150,7 +150,7 @@ final class InventoryController extends AbstractController
         return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    #[Route('/delete/{id}', name: 'delete-inventory')]
+    #[Route('/{id}/delete', name: 'delete-inventory')]
     public function delete(
         Inventory $inventory,
         EntityManagerInterface $em,
