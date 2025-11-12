@@ -13,7 +13,7 @@
 	{% if currentInventory is defined and currentInventory is not null %}
 		{% include "inventory_item/inventory.html.twig" %}
 	{% else %}
-		<h4 class="section-title">Sessions inventaires ouvertes</h4>
+		<h4 class="section-title">Sessions d'inventaire ouvertes</h4>
 
 		<div class="btn-card-wrapper">
 			{% if inventories and inventories|length > 0 %}
@@ -30,9 +30,10 @@
 					</a>
 				{% endfor %}
 			{% else %}
-				<div class="no-result">
-					<p>Aucune session d’inventaire ouverte</p>
-				</div>
+				<div class="no-result no-loan">
+		<p>Aucune session d'inventaire pour le moment...</p>
+		<div class="result-icon empty"></div>
+	</div>
 			{% endif %}
 		</div>
 	{% endif %}

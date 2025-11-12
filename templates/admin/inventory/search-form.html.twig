@@ -38,13 +38,8 @@
 		</div>
 	</div>
 
-	{% if inventories is defined and inventories is not empty %}
+	{% if inventories is defined %}
 		{% include "admin/inventory/inventory-list.html.twig" %}
-	{% else %}
-		<div class="no-result no-loan">
-			<p>Aucune session d'inventaire</p>
-			<div class="result-icon empty"></div>
-		</div>
 	{% endif %}
 
 {% endif %}

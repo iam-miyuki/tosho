@@ -38,8 +38,9 @@
     </div>
 
     <div class="btn-wrapper">
-        <button class="btn-form" type="submit">Valider</button>
-    </div>
+		<button class="btn-form" type="submit">Ajouter</button>
+		<div class="href-btn cancel-btn"><a href="{{path('inventory-page',{id:currentInventory.id, tab:'check'})}}">Annuler</a></div>
+	</div>
 
     {{ form_end(addForm) }}
 </div>

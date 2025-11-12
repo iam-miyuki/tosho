@@ -34,7 +34,12 @@
 				{% endfor %}
 			</ul>
 		{% else %}
-			<p>Aucune famille trouvée !</p>
+			<div class="card one-card not-found">
+				<div class="card-title">
+					<h4>Aucune famille trouvée !</h4>
+					<div class="icon-not-found"></div>
+				</div>
+			</div>
 		{% endif %}
 	</div>
 {% endif %}

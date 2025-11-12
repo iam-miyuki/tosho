@@ -1,42 +1,49 @@
-<div class="cards-wrapper">
-	{% for inventory in inventories %}
-		<div class="card">
-			<div class="card-header">
-				<div class="icon edit-icon">
-					<a href="{{ path('edit-inventory', { id: inventory.id }) }}">
-						<span>edit</span>
-					</a>
+{% if inventories|length > 0 %}
+	<div class="cards-wrapper">
+		{% for inventory in inventories %}
+			<div class="card">
+				<div class="card-header">
+					<div class="icon edit-icon">
+						<a href="{{ path('edit-inventory', { id: inventory.id }) }}">
+							<span>edit</span>
+						</a>
+					</div>
+
+					<div class="icon delete-icon">
+						<a href="{{ path('delete-inventory', { id: inventory.id }) }}">
+							<span>delete</span>
+						</a>
+					</div>
 				</div>
 
-				<div class="icon delete-icon">
-					<a href="{{ path('delete-inventory', { id: inventory.id }) }}">
-						<span>delete</span>
-					</a>
+				<div class="card-body">
+					<div class="detail-item">
+						<p>Nom de session :
+							{{ inventory.name}}</p>
+						<p>Date :
+							{{ inventory.date|date('d/m/Y') }}</p>
+						<p>Lieu :
+							{{ inventory.location.value }}</p>
+						{% if inventory.note is not null %}
+							<p>Commentaire :
+								{{ inventory.note }}</p>
+						{% endif %}
+						<p>Statut :
+							{{ inventory.status.value }}</p>
+					</div>
+				</div>
+				<div class="btn-wrapper">
+					<div class="href-btn">
+						<a href="{{path('show-inventory',{tab:'search',id:inventory.id})}}">Voir
+							<img src="{{ asset('img/right.svg') }}" alt="right"></a>
+					</div>
 				</div>
 			</div>
-
-			<div class="card-body">
-				<div class="detail-item">
-					<p>Nom de session :
-						{{ inventory.name}}</p>
-					<p>Date :
-						{{ inventory.date|date('d/m/Y') }}</p>
-					<p>Lieu :
-						{{ inventory.location.value }}</p>
-					{% if inventory.note is not null %}
-						<p>Commentaire :
-							{{ inventory.note }}</p>
-					{% endif %}
-					<p>Statut :
-						{{ inventory.status.value }}</p>
-				</div>
-			</div>
-			<div class="btn-wrapper">
-				<div class="href-btn">
-					<a href="{{path('show-inventory',{tab:'search',id:inventory.id})}}">Voir
-						<img src="{{ asset('img/right.svg') }}" alt="right"></a>
-				</div>
-			</div>
-		</div>
-	{% endfor %}
-</div>
+		{% endfor %}
+	</div>
+{% else %}
+	<div class="no-result no-loan">
+		<p>Aucune session d'inventaire</p>
+		<div class="result-icon empty"></div>
+	</div>
+{% endif %}
