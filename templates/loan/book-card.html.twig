@@ -1,7 +1,7 @@
 <div class="card">
 	<h3>Livre disponible</h3>
 	<div class="card-body">
-		<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" alt="{{ book.coverUrl ? currentBook.title : 'book-for-child' }}">
+		<img class="book-cover" src="{{ book.coverUrl ? book.coverUrl : asset('img/child-book.svg') }}" alt="{{ book.coverUrl ? book.title : 'book-for-child' }}">
 		<div class="detail book-details">
 			<p>Code :
 				{{ book.code }}</p>
@@ -9,6 +9,10 @@
 				{{ book.title }}</p>
 			<p>Auteur :
 				{{ book.author }}</p>
+			<p>Titre (JP) :
+				{{ book.jpTitle }}</p>
+			<p>Auteur (JP) :
+				{{ book.jpAuthor }}</p>
 			<p>Statut :
 				{{ book.status.value }}</p>
 			<p>Lieu :

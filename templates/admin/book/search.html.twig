@@ -56,7 +56,6 @@
 
 	</div>
 
-
 	{% if books is defined and books is not null %}
 		<div class="section-title">
 			<h4>Résultats de recherche :</h4>
@@ -73,7 +72,12 @@
 					{% endfor %}
 				</ul>
 			{% else %}
-				<p>Aucun livre trouvée !</p>
+				<div class="card one-card not-found">
+					<div class="card-title">
+						<h4>Aucun livre ne correspond à votre recherche</h4>
+						<div class="icon-not-found"></div>
+					</div>
+				</div>
 			{% endif %}
 		</div>
 	{% endif %}
@@ -81,6 +85,11 @@
 	{% if currentBook is defined and currentBook is not null %}
 		{% include "admin/book/book.html.twig" %}
 	{% endif %}
+
+	{% if notFoundCode is defined %}
+	{% include "admin/book/notFound.html.twig" %}
+	{% endif %}
+	
 
 	{% if bookToEdit is defined and bookToEdit is not null %}
 		{% include "admin/book/edit.html.twig" %}

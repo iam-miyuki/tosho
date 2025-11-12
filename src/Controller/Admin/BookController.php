@@ -93,10 +93,17 @@ final class BookController extends AbstractController
         if ($findBookForm->isSubmitted()) {
             $code = $findBookForm->get('code')->getData();
             $currentBook = $bookRepository->findOneByCode($code);
+            if(!$currentBook){
+                return $this->render('admin/book/index.html.twig', array_merge($sharedData,[
+                    'notFoundCode'=>$code,
+                    'tab'=>'search'
+                ]));
+            }
             return $this->redirectToRoute('admin-show-book', [
                 'id' => $currentBook->getId()
             ]);
         }
+        //ajouter le cas on trouve pas de livre
 
         if ($form->isSubmitted() && $form->isValid()) {
             $book = $form->getData();

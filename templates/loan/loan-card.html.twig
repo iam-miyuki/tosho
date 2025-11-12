@@ -7,12 +7,14 @@
 			</a>
 		</div>
 		<div class="card-body">
-			<img class="book-cover" src="{{ loan.book.coverUrl ? asset(loan.book.coverUrl) : asset('img/child-book.svg') }}" 
+			<img class="book-cover" src="{{ loan.book.coverUrl ? loan.book.coverUrl : asset('img/child-book.svg') }}" 
 			alt="{{ loan.book.coverUrl ? loan.book.title : 'book-for-child' }}">
 			<div class="detail book-details">
 				<p>Code : {{ loan.book.code }}</p>
 				<p>Titre : {{ loan.book.title }}</p>
 				<p>Auteur : {{ loan.book.author }}</p>
+				<p>Titre (JP) : {{ loan.book.jpTitle }}</p>
+				<p>Auteur (JP) : {{ loan.book.jpAuthor }}</p>
 				<p>Bibliothécaire : {{loan.user.email}} </p>
 				<p>Date d’emprunt : {{ loan.loanDate|date('d/m/Y') }}</p>
 				<p>Date de retour prévu : {{ loan.expectedReturnDate|date('d/m/Y') }}</p>
