@@ -1,7 +1,7 @@
 <div>
 	<h4>Chercher par nom</h4>
 	{{ form_start(searchFamilyForm, {
-    		'action': path('family'),
+    		'action': path('family',{tab:'family'}),
     		'method': 'POST'
  			}) }}
 	{{ form_widget(searchFamilyForm.search, {
