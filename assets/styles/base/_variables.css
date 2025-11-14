@@ -1,20 +1,21 @@
 :root {
   /* colors */
   --color-primary: #debaff;
-  --color-btn:#ca91ff;
+  --color-btn:#d3a4ff;
   --color-text: #1c2176;
   --color-secondary: #b9faff;
-  --color-cameleon: #8affc6;
+  --color-cameleon: #a0ffd1;
   --color-badet:#B9FAFF; 
-  --color-f: #ffabe1;
+  --color-f: #fcb4e3;
   --color-mba: #faff9b;
-  --color-alert: #ffbabb;
-  --color-btn-hover:#9DFF9B ;
+  --color-alert: #ffc2c3;
+  --color-btn-hover: #acffcf;
   --color-edit: #c9ffba;
   --color-background: #fefefe;
   --color-cards: #ffffff;
   --color-admin:#a9b9fa;
-  --color-btn-alert:#ff9596;
+  --color-btn-alert:#ffa4ac;
+
 
   /* font-size */
   --font-xs: 0.875rem; 
