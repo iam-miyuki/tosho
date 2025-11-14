@@ -1,4 +1,163 @@
-.tab{
+/* ------------------------------
+   BASE DES ONGLET & CONTAINERS
+------------------------------ */
+
+.tab {
+  font-family: var(--font-main);
+  flex: 1;
+  cursor: pointer;
+  border: 2px solid;
+  font-weight: bold;
+  font-size: var(--font-m);
+  color: var(--color-text);
+  border-radius: 8px 8px 0 0;
+  padding: 1rem 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-container {
+  border-radius: 12px;
+  margin: 1rem 5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tabs {
+  display: flex;
+}
+
+/* ------------------------------
+   ICONES D’ONGLETS
+------------------------------ */
+
+.tab-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 0.5rem;
+}
+
+.family-tab .tab-icon{
+  background-image: url("../../img/search-user-180618a56d603663065620e049db00c4.svg");
+}
+
+.book-tab .tab-icon,
+.search-tab .tab-icon {
+  background-image: url("../../img/search-2-1650990afe74ecdaf16c3e2f89062ea5.svg");
+}
+
+.new-tab .tab-icon {
+  background-image: url("../../img/plus-6691a72407e22f9b1ec542dab98bcbc0.svg");
+}
+
+.status-tab .tab-icon {
+  background-image: url("../../img/search-3-65725b99f1919610b1f1646fa309040c.svg");
+}
+
+.check-tab .tab-icon {
+  background-image: url("../../img/search-check-570aa0f5000c536a4ded428cc1467458.svg");
+}
+
+/* ------------------------------
+   COULEURS DES ONGLET SELON RÔLE
+------------------------------ */
+
+/* Librarian */
+.librarien-tab.left-tab  { background-color: var(--color-primary); }
+.librarien-tab.right-tab { background-color: var(--color-admin); }
+
+/* Admin */
+.admin-tab.left-tab  { background-color: var(--color-admin); }
+.admin-tab.right-tab { background-color: var(--color-primary); }
+
+/* ------------------------------
+   ACTIVE + HOVER
+------------------------------ */
+
+/* Active : enlève hover + clic */
+.tab.active {
+  border-bottom: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Hover normal (uniquement si non active) */
+.tab:hover {
+  background-color: var(--color-btn-hover);
+}
+
+/* ------------------------------
+   CONTENU DES TABS
+------------------------------ */
+
+.tab-content {
+  display: none;
+  padding: 3rem;
+  background: #fff;
+  border: 2px solid;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  font-family: var(--font-sub);
+  font-weight: 600;
+  min-height: 300px;
+  align-items: center;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.tab-content img {
+  width: 30px;
+  height: auto;
+}
+
+.tab-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ------------------------------
+   RESPONSIVE
+------------------------------ */
+
+@media (max-width: 768px) {
+  .tab-container {
+    margin: 1rem 0.2rem;
+  }
+
+  .tab-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tab-content {
+    padding: 2rem 0;
+  }
+
+  .tab-content h4 {
+    margin-top: 0;
+  }
+
+  .check-tab .tab-icon {
+    margin-right: 0.2rem;
+  }
+
+  .tabs .check-tab {
+    padding: 1rem;
+  }
+
+  .tab-content form {
+    margin: 0 0.2rem;
+  }
+}
+
+/*.tab{
   font-family: var(--font-main);
 }
 .tab-container {
