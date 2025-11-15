@@ -42,24 +42,24 @@
 }
 
 .family-tab .tab-icon{
-  background-image: url("../../img/search-user-180618a56d603663065620e049db00c4.svg");
+  background-image: url("../../img/search-user.svg");
 }
 
 .book-tab .tab-icon,
 .search-tab .tab-icon {
-  background-image: url("../../img/search-2-1650990afe74ecdaf16c3e2f89062ea5.svg");
+  background-image: url("../../img/search-2.svg");
 }
 
 .new-tab .tab-icon {
-  background-image: url("../../img/plus-6691a72407e22f9b1ec542dab98bcbc0.svg");
+  background-image: url("../../img/plus.svg");
 }
 
 .status-tab .tab-icon {
-  background-image: url("../../img/search-3-65725b99f1919610b1f1646fa309040c.svg");
+  background-image: url("../../img/search-3.svg");
 }
 
 .check-tab .tab-icon {
-  background-image: url("../../img/search-check-570aa0f5000c536a4ded428cc1467458.svg");
+  background-image: url("../../img/search-check.svg");
 }
 
 /* ------------------------------

@@ -18,12 +18,11 @@
 
 	<div class="cards-container">
 		{% if book is defined and book is not null %}
-			{% if loan %}
-				{% include 'loan/loan-card.html.twig' %}
-			{% else %}
-				{% include 'loan/book-card.html.twig' %}
-			{% endif %}
+
+			{% include 'loan/loan-card.html.twig' %}
+
 		{% endif %}
+
 		{% if notFoundCode is defined %}
 			<div class="card one-card not-found">
 				<div class="card-title">
