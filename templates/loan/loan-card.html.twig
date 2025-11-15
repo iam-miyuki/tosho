@@ -10,21 +10,25 @@
 		{% endif %}
 	</div>
 	<div class="card-body">
-		<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" alt="{{ book.coverUrl ? book.title : 'book-for-child' }}">
+		{% if loan is not null %}
+			<img class="book-cover" src="{{ loan.book.coverUrl ? asset(loan.book.coverUrl) : asset('img/child-book.svg') }}" alt="{{ loan.book.coverUrl ? loan.book.title : 'book-for-child' }}">
+		{% else %}
+			<img class="book-cover" src="{{ book.coverUrl ? asset(book.coverUrl) : asset('img/child-book.svg') }}" alt="{{ book.coverUrl ? book.title : 'book-for-child' }}">
+		{% endif %}
 		<div class="detail book-details">
-			<p>Code :
-				{{ book.code }}</p>
-			<p>Titre :
-				{{ book.title }}</p>
-			<p>Auteur :
-				{{ book.author }}</p>
-			<p>Titre (JP) :
-				{{ book.jpTitle }}</p>
-			<p>Auteur (JP) :
-				{{ book.jpAuthor }}</p>
-			<p>Statut :
-				{{ book.status.value }}</p>
 			{% if loan is not null %}
+				<p>Code :
+					{{ loan.book.code }}</p>
+				<p>Titre :
+					{{ loan.book.title }}</p>
+				<p>Auteur :
+					{{ loan.book.author }}</p>
+				<p>Titre (JP) :
+					{{ loan.book.jpTitle }}</p>
+				<p>Auteur (JP) :
+					{{ loan.book.jpAuthor }}</p>
+				<p>Statut :
+					{{ loan.book.status.value }}</p>
 				<p>Bibliothécaire :
 					{{loan.user.email}}
 				</p>
@@ -36,10 +40,26 @@
 					{{ loan.family.name|upper }}
 					/
 					{{ loan.family.jpName }}</p>
+				<p>Emplacement :
+					<span class="location">{{ loan.book.location.value }}</span>
+				</p>
+			{% else %}
+				<p>Code :
+					{{ book.code }}</p>
+				<p>Titre :
+					{{ book.title }}</p>
+				<p>Auteur :
+					{{ book.author }}</p>
+				<p>Titre (JP) :
+					{{ book.jpTitle }}</p>
+				<p>Auteur (JP) :
+					{{ book.jpAuthor }}</p>
+				<p>Statut :
+					{{ book.status.value }}</p>
+				<p>Emplacement :
+					<span class="location">{{ book.location.value }}</span>
+				</p>
 			{% endif %}
-			<p>Emplacement :
-				<span class="location">{{ book.location.value }}</span>
-			</p>
 		</div>
 	</div>
 	{% if loan is null %}

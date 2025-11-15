@@ -97,6 +97,7 @@ final class LoanController extends AbstractController
         return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
+    // afficher la fiche livre
     #[Route(path: '/book/{id}', name: 'show-book')]
     public function book(
         Book $book,
@@ -111,6 +112,7 @@ final class LoanController extends AbstractController
         ]);
     }
 
+    // prêter un livre depuis l'onglet livre
     #[Route(path: '/loan-book/{id}', name: 'loan-book')]
     public function loanBook(
         Book $book,
@@ -148,6 +150,7 @@ final class LoanController extends AbstractController
         return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
+    //prêter un livre depuis l'onglet livre -> après avoir choisi la famille emprunteuse
     #[Route(path: '/loan-book/{id}/{family}', name: 'loan-book-family')]
     public function loanBookFamily(
         Book $book,
@@ -169,6 +172,7 @@ final class LoanController extends AbstractController
         ]);
     }
 
+    //l'onglet famille 
     #[Route(path: '/family/{id}', name: 'loan-by-family')]
     public function family(
         Family $family,
