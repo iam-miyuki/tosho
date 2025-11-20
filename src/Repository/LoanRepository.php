@@ -36,24 +36,25 @@ class LoanRepository extends ServiceEntityRepository
             ->addSelect('book')
             ->leftJoin('l.book', 'book')
             ->andWhere('l.family = :family')
-            ->andWhere('l.status = :status')
+            ->andWhere('l.status NOT IN (:status)')
             ->setParameter('family', $family)
-            ->setParameter('status', LoanStatusEnum::inProgress)
-            ;
+            ->setParameter('status', [LoanStatusEnum::returned])
+
+        ;
         return $qb->getQuery()->getResult();
     }
 
-    // trouver un loan par livre et statut = en cours
+    // trouver un loan par livre et statut != returned
     public function findWithBookAndStatus(Book $book)
     {
         $qb = $this->createQueryBuilder('l');
         $qb
-        ->addSelect('family')
-        ->leftJoin('l.family', 'family')
-        ->andWhere('l.book = :book')
-        ->andWhere("l.status = :status")
-        ->setParameter('book', $book)
-        ->setParameter('status', LoanStatusEnum::inProgress);
+            ->addSelect('family')
+            ->leftJoin('l.family', 'family')
+            ->andWhere('l.book = :book')
+            ->andWhere("l.status NOT IN (:status)")
+            ->setParameter('book', $book)
+            ->setParameter('status', [LoanStatusEnum::returned]);
         return $qb->getQuery()->getOneOrNullResult();
     }
 }
