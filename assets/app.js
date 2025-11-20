@@ -27,19 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const activeButtons = document.querySelectorAll(".active-btn");
-  // console.log(activeButtons);
   activeButtons.forEach((button) => {
     button.addEventListener("click", async () => {
       const route = button.dataset.href;
-      // console.log(route)
+      // console.log(route);
       try {
         const response = await fetch(route);
         if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
+          throw new Error(`error lors de récupération de réponse depuis back-end !`);
         }
         const json = await response.json();
-        console.log(json);
-
+        console.log(json.isActive);
         const text = button.textContent;
         if (json.isActive) {
           button.textContent = "Activé";

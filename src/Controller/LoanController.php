@@ -157,6 +157,10 @@ final class LoanController extends AbstractController
         Family $family,
         EntityManagerInterface $em
     ): Response {
+        if ($book->getStatus() === BookStatusEnum::borrowed) {
+            return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
         $loan = new Loan();
         $loan->setFamily($family);
         $loan->setBook($book);
@@ -242,30 +246,29 @@ final class LoanController extends AbstractController
     ): Response {
         $book = $loan->getBook();
 
-        if (
-            $loan->getStatus() != LoanStatusEnum::returned
-        ) {
-            $loan->setStatus(LoanStatusEnum::returned);
-            $book->setStatus(BookStatusEnum::available);
-            $loan->setReturnDate(new \DateTime());
-            $loan->setUser($this->getUser());
-            $em->persist($loan);
-            $em->persist($book);
-            $em->flush();
-            return $this->redirectToRoute('loan-by-family', [
-                'id' => $loan->getFamily()->getId()
-            ]);
+        if ($loan->getStatus() === LoanStatusEnum::returned) {
+            return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new Response('500 Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        
+        $loan->setStatus(LoanStatusEnum::returned);
+        $book->setStatus(BookStatusEnum::available);
+        $loan->setReturnDate(new \DateTime());
+        $loan->setUser($this->getUser());
+        $em->persist($loan);
+        $em->persist($book);
+        $em->flush();
+        return $this->redirectToRoute('loan-by-family', [
+            'id' => $loan->getFamily()->getId()
+        ]);
     }
     #[Route('/overdue', name: 'overdue')]
     public function overdue(
         LoanRepository $loanRepository
     ): Response {
         $overdueLoans = $loanRepository->findAllByStatus(LoanStatusEnum::overdue);
-        return $this->render('loan/index.html.twig',[
-            'tab'=>'family',
-            'alloverdueloans'=>$overdueLoans
+        return $this->render('loan/index.html.twig', [
+            'tab' => 'family',
+            'alloverdueloans' => $overdueLoans
         ]);
     }
 }

@@ -138,7 +138,7 @@ final class LibrarienController extends AbstractController
 
     #[Route('/change-status/{id}', name: 'change-status')]
     public function change(
-        User $user, //ParamConverter : faire le lien entre le paramètre dans l'url(id) et l'entité sans faire de requette
+        User $user, 
         EntityManagerInterface $em
     ): JsonResponse {
         $user->setIsActive(!$user->isActive());
