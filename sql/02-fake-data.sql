@@ -131,7 +131,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `book` WRITE;
 INSERT INTO `book` (`title`, `author`, `cover_url`, `location`, `jp_title`, `jp_author`, `added_at`, `status`, `code`) VALUES
-('11 Piki no Neko', 'Baba Noboru', 'https://covers.openlibrary.org/b/isbn/9784834000601-S.jpg', 'Caméléon', '１１ぴきのねこ', 'ババ ノボル', '2025-11-11 10:00:00', 'Disponible', '0001'),
+('11 Piki no Neko', 'Baba Noboru', 'https://covers.openlibrary.org/b/isbn/9784772100045-S.jpg', 'Caméléon', '１１ぴきのねこ', 'ババ ノボル', '2025-11-11 10:00:00', 'Disponible', '0001'),
 ('Guri to Gura', 'Nakagawa Rie', 'https://covers.openlibrary.org/b/isbn/9784834000618-S.jpg', 'F', 'ぐりとぐら', 'ナカガワ リエ', '2025-11-11 10:05:00', 'Disponible', '0002'),
 ('Majo no Takkyubin', 'Kadono Eiko', NULL, 'Badet', 'まじょのたっきゅうびん', 'カドノ エイコ', '2025-11-11 10:10:00', 'Disponible', '0003'),
 ('Shirokuma-chan no Hotcake', 'Ken Wakayama', 'https://covers.openlibrary.org/b/isbn/9784033325808-S.jpg', 'MBA', 'しろくまちゃんのほっとけーき', 'ワカヤマ ケン', '2025-11-11 10:15:00', 'Disponible', '0004'),

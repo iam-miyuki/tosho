@@ -22,7 +22,7 @@ export default class extends Controller {
     const openBdUrl = `https://api.openbd.jp/v1/get?isbn=${isbn}`;
     try {
       const response = await fetch(openBdUrl);
-      
+
       if (!response.ok) {
         throw new Error(`Erreur HTTP: ${response.status}`);
       }
@@ -51,7 +51,7 @@ export default class extends Controller {
       }
       const data = await response.json();
 
-     // console.log(data);
+      console.log(data);
       // On récupère les données du livre à partir de l'ISBN
       const bookKey = `ISBN:${isbn}`;
       const bookInfo = data[bookKey];
@@ -66,15 +66,13 @@ export default class extends Controller {
       const authors = bookInfo.authors
         ? bookInfo.authors.map((author) => author.name).join(", ")
         : "Auteur non disponible";
-      const coverUrl = bookInfo.cover.small 
+      //  console.log(title, authors);
 
       // Affichage des informations
+      console.log(document.querySelector("#book_form_title"));
       document.querySelector("#book_form_title").value = title;
       document.querySelector("#book_form_author").value = authors;
-      document.querySelector("#book_form_coverUrl").value = coverUrl;
-      document.querySelector("img.book-cover").src = coverUrl;
       document.querySelector("img.book-cover").alt = title;
-
       return {
         title,
         authors,
@@ -84,6 +82,30 @@ export default class extends Controller {
         "Erreur lors de la récupération des informations du livre :",
         error
       );
+    }
+  }
+
+  async getBookCover(e) {
+    e.preventDefault();
+    const isbn = document.querySelector("#isbn_search").value.trim();
+    if (!isbn) {
+      alert("Veuillez saisir un ISBN");
+      return;
+    }
+
+    const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
+
+    try {
+      const response = await fetch(coverUrl);
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+
+      document.querySelector("#book_form_coverUrl").value = coverUrl;
+      document.querySelector("img.book-cover").src = coverUrl;
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la couverture :", error);
     }
   }
 }
