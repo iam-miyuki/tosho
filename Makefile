@@ -12,3 +12,5 @@ down:
 	docker compose -f docker-compose.yaml down
 cache:
 	docker exec -it tosho-app-1 php bin/console cache:clear
+asset:
+	docker exec -it tosho-app-1 php bin/console asset-map:compile
