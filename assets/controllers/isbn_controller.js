@@ -108,4 +108,31 @@ export default class extends Controller {
       console.error("Erreur lors de la récupération de la couverture :", error);
     }
   }
+
+  async changerStatus(e) {
+    e.preventDefault();
+    const button = document.querySelector(".active-btn");
+    const route = button.dataset.href;
+    // console.log(route);
+    try {
+      const response = await fetch(route);
+      if (!response.ok) {
+        throw new Error(`error lors de récupération de route`);
+      }
+      const json = await response.json();
+      console.log(json.isActive);
+
+      if (json.isActive) {
+        button.textContent = "Activé";
+        button.classList.remove("btn-red");
+        button.classList.add("btn-green");
+      } else {
+        button.textContent = "Désactivé";
+        button.classList.remove("btn-green");
+        button.classList.add("btn-red");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 }

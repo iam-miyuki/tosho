@@ -26,19 +26,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const activeButtons = document.querySelectorAll(".active-btn");
-  activeButtons.forEach((button) => {
+  /*const button = document.querySelector(".active-btn");
     button.addEventListener("click", async () => {
       const route = button.dataset.href;
       // console.log(route);
       try {
         const response = await fetch(route);
         if (!response.ok) {
-          throw new Error(`error lors de récupération de réponse depuis back-end !`);
+          throw new Error(`error lors de récupération de route`);
         }
         const json = await response.json();
         console.log(json.isActive);
-        const text = button.textContent;
+
         if (json.isActive) {
           button.textContent = "Activé";
           button.classList.remove("btn-red");
@@ -51,6 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         console.error(error.message);
       }
-    });
-  });
+    });*/
+  
 });

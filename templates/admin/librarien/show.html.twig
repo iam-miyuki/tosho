@@ -28,7 +28,7 @@
                 <p>: {{ librarien.email }}</p>
 
                 {# Bouton toggle #}
-                <button
+                <button data-controller="isbn" data-action="click->isbn#changerStatus"
                     class="active-btn {{ librarien.isActive ? 'btn-green' : 'btn-red' }}"
                     data-href="{{ path('change-status', {id: librarien.id}) }}">
                     {{ librarien.isActive ? 'Activé' : 'Désactivé' }}
