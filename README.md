@@ -5,19 +5,15 @@
 ## 1. 💡 Présentation du projet
 
 ### 🧭 Contexte  
-Le projet **Tosho** — qui signifie *« bibliothèque »* ou *« livre »* en japonais — est une application web développée pour moderniser **la gestion des prêts de livres au sein d’une école japonaise associative**.  
-Cette école, gérée par des parents bénévoles, propose des cours de japonais aux enfants d’origine japonaise et met à leur disposition une petite bibliothèque afin d’encourager la lecture en langue japonaise.
-
-Jusqu’à présent, la gestion repose sur une application dévéloppé par un ancien parent bénévol il y a plusieurs années : pas d’accès administrateur, difficulté de recherche (notamment en japonais) et interface peu ergonomique.  
-**Tosho** a été conçu pour répondre à ces besoins, en offrant une solution moderne, fluide et adaptée aux bénévoles.
-
+Le projet **Tosho** — qui signifie *« bibliothèque »* ou *« livre »* en japonais — est une application web développée pour moderniser **la gestion des prêts de livres pour une petite bibliothéque*.  
+**Tosho** est le projet que j’ai développé pour appliquer concrètement les compétences acquises lors de ma formation DWWM.
 ---
 
 ## 2. 🎯 Objectifs
 
 - ✅ **Faciliter** la gestion des prêts et retours de livres.  
 - 📊 **Simplifier** la tenue de l’inventaire de la bibliothèque.  
-- 👥 **Donner autonomie** aux bénévoles via une interface claire et intuitive.  
+- 👥 **Donner autonomie** aux utilisateurs via une interface claire et intuitive.  
 - 🔐 **Sécuriser** l’accès selon les rôles (Admin / Bibliothécaire).  
 
 ---
@@ -42,7 +38,7 @@ Jusqu’à présent, la gestion repose sur une application dévéloppé par un a
 
 ### 📋 Inventaire
 - 🔍 Saisie du **code du livre** pour vérifier sa présence.  
-- ⚠️ Possibilité de **signaler une anomalie** : livre non trouvé, mal rangé, abîmé, etc.  
+- ⚠️ Possibilité de **signaler une anomalie** : livre non trouvé, abîmé, etc.  
 
 ### 🛠️ Gestion des livres *(Admin uniquement)*
 - ➕ Ajouter un livre  
@@ -88,7 +84,7 @@ Jusqu’à présent, la gestion repose sur une application dévéloppé par un a
 | **MySQL** | Base de données |
 
 **Tosho** est conçu pour être :
-- 💻 **Simple d’utilisation** pour les bénévoles non techniques  
+- 💻 **Simple d’utilisation** pour les utilisateurs non techniques  
 - 📱 **Responsive**, utilisable sur mobile et desktop  
 
 ---
@@ -100,7 +96,7 @@ Jusqu’à présent, la gestion repose sur une application dévéloppé par un a
 - 📬 Envoi d’e-mails de rappel pour les retours en retard  
 - 📌 Réservation des livres  
 - 🌏 Interface multilingue (français / japonais)  
-- 🗓️ Planning des parents bibliothécaires  
+- 🗓️ Planning des bibliothécaires  
 
 ---
 
