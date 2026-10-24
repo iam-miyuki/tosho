@@ -54,9 +54,10 @@ services:
 
   ### app tosho
   app: 
-    build:
-      context: .
-      dockerfile: Dockerfile
+    ###build:
+      ###context: .
+      ###dockerfile: Dockerfile
+    image: docker.io/iammiyuki/tosho:1.0
     #container_name: tosho_app
     ports: 
       #- "7878:80"
